@@ -2,71 +2,71 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+use App\SocialAccount;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->redirectPath = route('home');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function redirectToProvider($provider)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
+        return Socialite::driver($provider)->redirect();
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
+    public function handleProviderCallback($provider)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $user = Socialite::driver($provider)->user();
+
+        $data = [
+            'name' => $user->getName(),
+            'email' => $user->getEmail()
+        ];
+
+
+        $providerName = class_basename($provider);
+
+        $account = SocialAccount::whereProvider($providerName)
+            ->whereProviderUserId($user->getId())
+            ->first();
+
+        if ($account) {
+
+            $user = $account->user;
+
+        } else {
+
+            $account = new SocialAccount([
+                'provider_user_id' => $user->getId(),
+                'provider' => $providerName
+            ]);
+
+            $user = User::whereEmail($user->getEmail())->first();
+
+            if (!$user) {
+                $user = User::create($data);
+            }
+
+            $account->user()->associate($user);
+            $account->save();
+
+        }
+
+        Auth::login($user);
+
+        return redirect($this->redirectPath());
     }
 }

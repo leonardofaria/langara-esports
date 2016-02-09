@@ -12,8 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,15 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
 
     Route::resource('games', 'GamesController');
+
+    // Authentication routes...
+    // Route::get('auth/login', 'Auth\AuthController@getLogin');
+    // Route::post('auth/login', 'Auth\AuthController@postLogin');
+    Route::get('auth/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'logout']);
+    Route::get('social/login/redirect/{provider}', ['uses' => 'Auth\AuthController@redirectToProvider', 'as' => 'social.login']);
+    Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallback');
+
+    Route::get('home', ['as' => 'home', 'uses' => 'PagesController@home']);
+    Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'PagesController@dashboard']);
 
 });
