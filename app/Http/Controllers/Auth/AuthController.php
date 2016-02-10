@@ -7,10 +7,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-use App\SocialAccount;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\SocialAccount;
+use App\Admin;
 
 class AuthController extends Controller
 {
@@ -35,7 +36,6 @@ class AuthController extends Controller
             'name' => $user->getName(),
             'email' => $user->getEmail()
         ];
-
 
         $providerName = class_basename($provider);
 
@@ -62,6 +62,12 @@ class AuthController extends Controller
 
             $account->user()->associate($user);
             $account->save();
+
+            $admins = Admin::all();
+
+            if (count($admins) == 0) {
+                Admin::create(['user_id' => $user->id]);
+            }
 
         }
 

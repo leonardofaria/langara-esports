@@ -42,10 +42,20 @@ class User extends Authenticatable
         return $this->hasOne('App\SocialAccount');
     }
 
+    public function admin()
+    {
+        return $this->hasOne('App\Admin');
+    }
+
     public function avatar()
     {
         if ($this->social_account()->first()->provider === 'facebook') {
             return "//graph.facebook.com/" . $this->social_account()->first()->provider_user_id . "/picture?type=square";
         }
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin()->first();
     }
 }

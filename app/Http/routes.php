@@ -31,6 +31,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::resource('games', 'GamesController');
     Route::resource('events', 'EventsController');
+    Route::resource('admins', 'AdminsController');
 
     // Authentication routes...
     // Route::get('auth/login', 'Auth\AuthController@getLogin');
