@@ -2,11 +2,9 @@
 
 @section('content')
 
-    <img src="{{ $user->avatar() }}" />
+    <h1 class="title"><img src="{{ $user->avatar() }}" /> Hello {{ $user->name }}</h1>
 
-    <h1>Hello {{ $user->name }}</h1>
-
-    @if (count($user->games) < 2000)
+    @if (count($user->games) == 0)
 
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -25,13 +23,14 @@
         </div>
         <div class="panel-body">
             @foreach($events as $event)
-                {{ $event->game()->first()->name }} / {{ $event->name }} <br/>
+                Date: {{ $event->played_at->format('d/m/Y H:i') }} - {{ $event->played_at->diffForHumans() }}<br/>
+                Game: {{ $event->game()->first()->name }} / Title: {{ $event->name }} <br/>
 
                 @if ($event->description)
-                    <small>{{ $event->description }}</small><br/>
+                    Description: {{ $event->description }}<br/>
                 @endif
 
-                created by {{ $event->user()->first()->name }}
+                Created by {{ $event->user()->first()->name }}
                 <hr/>
             @endforeach
         </div>

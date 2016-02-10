@@ -22,14 +22,23 @@ class PagesController extends Controller
             $games = Game::all();
             $events = Event::latest('created_at')->future()->get();
 
+            if (count($user->games) == 0) {
+                Flash::info('Select one or more games to get info about next events');
+            }
+
             return view('pages/timeline', compact('user', 'games', 'events'));
         } else {
             return view('pages/home');
         }
     }
 
-    public function dashboard() {
-        dd($this->user);
+    public function profile() {
+
+        $user = $this->user;
+        $games = Game::all();
+
+        return view('pages/profile', compact('user', 'games'));
+
     }
 
     public function favourites(Request $request) {

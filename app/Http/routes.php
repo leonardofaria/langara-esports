@@ -40,7 +40,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallback');
 
     Route::get('home', ['as' => 'home', 'uses' => 'PagesController@home']);
-    Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'PagesController@dashboard']);
+    Route::get('profile', ['as' => 'profile', 'uses' => 'PagesController@profile']);
     Route::post('favourites', ['as' => 'favourites', 'uses' => 'PagesController@favourites']);
 
 });

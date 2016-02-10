@@ -5,9 +5,9 @@
     <link href="/css/app.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div class="container">
 
-    <nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">
+    <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ route('home') }}">Langara eSports</a>
         </div>
@@ -17,15 +17,21 @@
             @else
                 <li><a href="{{ URL::to('games/create') }}">New game</a></li>
                 <li><a href="{{ URL::to('events/create') }}">New event</a></li>
+                <li><a href="{{ route('profile') }}">Your profile</a></li>
                 <li><a href="{{ route('logout') }}">Logout</a></li>
             @endunless
         </ul>
-    </nav>
+    </div>
+</nav>
+
+<div class="container">
 
     @include('flash::message')
 
     @yield('content')
 
 </div>
+
+<script type="text/javascript" src="/js/app.js"></script>
 </body>
 </html>

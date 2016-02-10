@@ -14,6 +14,8 @@ class Event extends Model
         'played_at',
     ];
 
+    protected $dates = ['played_at'];
+
     public function setPublishedAttribute($date)
     {
         $this->attributes['played_at'] = Carbon::parse($date);

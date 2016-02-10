@@ -1,5 +1,17 @@
 @import "bootstrap";
 
+.title {
+  height: 50px;
+  line-height: 50px;
+  margin: 0 0 25px 0;
+
+  img {
+    height: 50px;
+    vertical-align: bottom;
+    width: 50px;
+  }
+}
+
 .games {
   list-style: none;
   margin: 0;

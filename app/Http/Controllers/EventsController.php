@@ -81,8 +81,9 @@ class EventsController extends Controller
     public function edit($id)
     {
         $event = Event::findOrFail($id);
+        $games = Game::lists('name', 'id');
 
-        return view('events.edit', compact('event'));
+        return view('events.edit', compact('event', 'games'));
     }
 
     /**
