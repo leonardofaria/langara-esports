@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Event;
 use App\Game;
 use App\Http\Requests;
-use App\Http\Requests\GameRequest;
+use App\Http\Requests\EventRequest;
 use Illuminate\HttpResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Flash;
 
-class GamesController extends Controller
+class EventsController extends Controller
 {
     public function __construct(){
         $this->user = Auth::user();
@@ -25,9 +26,9 @@ class GamesController extends Controller
      */
     public function index()
     {
-        $games = Game::all();
+        $events = Event::all();
 
-        return view('games.index', compact('games'));
+        return view('events.index', compact('events'));
     }
 
     /**
@@ -37,22 +38,25 @@ class GamesController extends Controller
      */
     public function create()
     {
-        return view('games.create');
+        $games = Game::lists('name', 'id');
+
+        return view('events.create', compact('games'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Requests\GameRequest $request
+     * @param Requests\EventRequest $request
      * @return Response
      */
-    public function store(GameRequest $request)
+    public function store(EventRequest $request)
     {
-        Game::create($request->all());
+        $event = new Event($request->all());
+        Auth::user()->events()->save($event);
 
-        Flash::success('The game has been created!');
+        Flash::success('The event has been created!');
 
-        return redirect('games');
+        return redirect('events');
     }
 
     /**
@@ -63,9 +67,9 @@ class GamesController extends Controller
      */
     public function show($id)
     {
-        $game = Game::findOrFail($id);
+        $event = Event::findOrFail($id);
 
-        return view('games.show', compact('game'));
+        return view('events.show', compact('event'));
     }
 
     /**
@@ -76,27 +80,27 @@ class GamesController extends Controller
      */
     public function edit($id)
     {
-        $game = Game::findOrFail($id);
+        $event = Event::findOrFail($id);
 
-        return view('games.edit', compact('game'));
+        return view('events.edit', compact('event'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int $id
-     * @param GameRequest $request
+     * @param EventRequest $request
      * @return Response
      */
-    public function update($id, GameRequest $request)
+    public function update($id, EventRequest $request)
     {
-        $game = Game::findOrFail($id);
+        $event = Event::findOrFail($id);
 
-        $game->update($request->all());
+        $event->update($request->all());
 
-        Flash::success('The game has been edited!');
+        Flash::success('The event has been edited!');
 
-        return redirect('games');
+        return redirect('events');
     }
 
     /**

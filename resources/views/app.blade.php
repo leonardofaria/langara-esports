@@ -16,14 +16,13 @@
                 <li><a href="{{ route('social.login', ['facebook']) }}">Login via Facebook</a></li>
             @else
                 <li><a href="{{ URL::to('games/create') }}">New game</a></li>
+                <li><a href="{{ URL::to('events/create') }}">New event</a></li>
                 <li><a href="{{ route('logout') }}">Logout</a></li>
             @endunless
         </ul>
     </nav>
 
-    @if (Session::has('message'))
-        <div class="alert alert-info">{{ Session::get('message') }}</div>
-    @endif
+    @include('flash::message')
 
     @yield('content')
 

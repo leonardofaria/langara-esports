@@ -3,12 +3,12 @@
 @section('content')
     <h1>All the games</h1>
 
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped">
         <thead>
         <tr>
-            <td>ID</td>
-            <td>Name</td>
-            <td>Actions</td>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>

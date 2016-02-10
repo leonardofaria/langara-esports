@@ -30,6 +30,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
 
     Route::resource('games', 'GamesController');
+    Route::resource('events', 'EventsController');
 
     // Authentication routes...
     // Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -40,5 +41,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('home', ['as' => 'home', 'uses' => 'PagesController@home']);
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'PagesController@dashboard']);
+    Route::post('favourites', ['as' => 'favourites', 'uses' => 'PagesController@favourites']);
 
 });

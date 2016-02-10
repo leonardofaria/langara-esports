@@ -17,6 +17,14 @@ class CreateGamesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Schema::create('game_user', function (Blueprint $table) {
+            $table->integer('game_id')->unsigned()->index();
+            $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
+
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
@@ -27,5 +35,6 @@ class CreateGamesTable extends Migration
     public function down()
     {
         Schema::drop('games');
+        Schema::drop('game_user');
     }
 }

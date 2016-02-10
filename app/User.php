@@ -23,4 +23,29 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function games()
+    {
+        return $this->belongsToMany('App\Game');
+    }
+
+    public function events()
+    {
+        return $this->hasMany('App\Event');
+    }
+
+    public function social_account()
+    {
+        return $this->hasOne('App\SocialAccount');
+    }
+
+    public function avatar()
+    {
+        if ($this->social_account()->first()->provider === 'facebook') {
+            return "//graph.facebook.com/" . $this->social_account()->first()->provider_user_id . "/picture?type=square";
+        }
+    }
 }
