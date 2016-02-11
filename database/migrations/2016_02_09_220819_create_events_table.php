@@ -16,6 +16,7 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description');
+            $table->boolean('official');
             $table->timestamp('played_at');
             $table->integer('game_id')->unsigned();
             $table->integer('user_id')->unsigned();

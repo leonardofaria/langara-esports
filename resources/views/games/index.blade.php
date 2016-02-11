@@ -3,6 +3,8 @@
 @section('content')
     <h1>All the games</h1>
 
+    <a href="{{ URL::to('games/create') }}" class="btn btn-primary pull-right">New game</a>
+
     <table class="table table-striped">
         <thead>
         <tr>

@@ -15,7 +15,11 @@
             @unless (Auth::check())
                 <li><a href="{{ route('social.login', ['facebook']) }}">Login via Facebook</a></li>
             @else
-                <li><a href="{{ URL::to('games/create') }}">New game</a></li>
+                @if (Auth::user()->admin()->first())
+                    <li><a href="{{ URL::to('games/') }}">Manage games</a></li>
+                    <li><a href="{{ URL::to('events/') }}">Manage events</a></li>
+                @endif
+
                 <li><a href="{{ URL::to('events/create') }}">New event</a></li>
                 <li><a href="{{ route('profile') }}">Your profile</a></li>
                 <li><a href="{{ route('logout') }}">Logout</a></li>

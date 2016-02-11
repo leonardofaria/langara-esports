@@ -10,6 +10,7 @@ class Event extends Model
     protected $fillable = [
         'name',
         'description',
+        'official',
         'game_id',
         'played_at',
     ];

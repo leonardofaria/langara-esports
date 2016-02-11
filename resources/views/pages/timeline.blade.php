@@ -23,15 +23,7 @@
         </div>
         <div class="panel-body">
             @foreach($events as $event)
-                Date: {{ $event->played_at->format('d/m/Y H:i') }} - {{ $event->played_at->diffForHumans() }}<br/>
-                Game: {{ $event->game()->first()->name }} / Title: {{ $event->name }} <br/>
-
-                @if ($event->description)
-                    Description: {{ $event->description }}<br/>
-                @endif
-
-                Created by {{ $event->user()->first()->name }}
-                <hr/>
+                @include('events._event')
             @endforeach
         </div>
     </div>

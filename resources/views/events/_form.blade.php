@@ -10,8 +10,15 @@
 
 <div class="form-group">
     {!! Form::label('played_at') !!}
-    {!! Form::text('played_at', date('Y-m-d H:i'), ['class' => 'form-control']) !!}
+    {!! Form::text('played_at', date('Y-m-d H:i:s'), ['class' => 'form-control']) !!}
 </div>
+
+@if (Auth::user()->admin()->first())
+<div class="form-group">
+    {!! Form::label('official') !!}
+    {{ Form::checkbox('official', 1, true) }}
+</div>
+@endif
 
 <div class="form-group">
     {!! Form::label('game_id') !!}

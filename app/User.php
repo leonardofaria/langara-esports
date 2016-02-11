@@ -49,6 +49,7 @@ class User extends Authenticatable
 
     public function avatar()
     {
+        # TODO: add more providers here
         if ($this->social_account()->first()->provider === 'facebook') {
             return "//graph.facebook.com/" . $this->social_account()->first()->provider_user_id . "/picture?type=square";
         }
@@ -56,6 +57,10 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->admin()->first();
+        if (count($this->admin()->first()) > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

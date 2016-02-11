@@ -9,4 +9,9 @@ class Game extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function events()
+    {
+        return $this->hasMany('App\Event');
+    }
 }

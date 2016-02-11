@@ -4,6 +4,6 @@
 
     <h1>Showing {{ $event->name }}</h1>
 
-    <p>Show nexts events here</p>
+    <p>Show details about this event and who will go</p>
 
 @stop

@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Game;
+use App\User;
 use App\Event;
 use App\Http\Requests;
-use App\Http\Requests\GameRequest;
+use App\Http\Requests\UserRequest;
 use Illuminate\HttpResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Flash;
 
-class GamesController extends Controller
+class UsersController extends Controller
 {
     public function __construct(){
         $this->middleware('admin', ['except' => 'show']);
@@ -28,9 +28,9 @@ class GamesController extends Controller
      */
     public function index()
     {
-        $games = Game::all();
+        $users = User::all();
 
-        return view('games.index', compact('games'));
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -40,22 +40,22 @@ class GamesController extends Controller
      */
     public function create()
     {
-        return view('games.create');
+        return view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Requests\GameRequest $request
+     * @param Requests\UserRequest $request
      * @return Response
      */
-    public function store(GameRequest $request)
+    public function store(UserRequest $request)
     {
-        Game::create($request->all());
+        User::create($request->all());
 
-        Flash::success('The game has been created!');
+        Flash::success('The user has been created!');
 
-        return redirect('games');
+        return redirect('users');
     }
 
     /**
@@ -66,10 +66,10 @@ class GamesController extends Controller
      */
     public function show($id)
     {
-        $game = Game::findOrFail($id);
-        $events = Event::where(['game_id' => $id])->future()->get();
+        $user = User::findOrFail($id);
+        $events = Event::where(['user_id' => $id])->future()->get();
 
-        return view('games.show', compact('game', 'events'));
+        return view('users.show', compact('user', 'events'));
     }
 
     /**
@@ -80,27 +80,27 @@ class GamesController extends Controller
      */
     public function edit($id)
     {
-        $game = Game::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        return view('games.edit', compact('game'));
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int $id
-     * @param GameRequest $request
+     * @param UserRequest $request
      * @return Response
      */
-    public function update($id, GameRequest $request)
+    public function update($id, UserRequest $request)
     {
-        $game = Game::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        $game->update($request->all());
+        $user->update($request->all());
 
-        Flash::success('The game has been edited!');
+        Flash::success('The user has been edited!');
 
-        return redirect('games');
+        return redirect('users');
     }
 
     /**
