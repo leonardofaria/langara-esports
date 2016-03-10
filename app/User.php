@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Session;
 
 class User extends Authenticatable
 {
@@ -37,6 +38,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Event');
     }
 
+    public function participants()
+    {
+        return $this->hasMany('App\Participant');
+    }
+
     public function social_account()
     {
         return $this->hasOne('App\SocialAccount');
@@ -51,8 +57,20 @@ class User extends Authenticatable
     {
         # TODO: add more providers here
         if ($this->social_account()->first()->provider === 'facebook') {
-            return "//graph.facebook.com/" . $this->social_account()->first()->provider_user_id . "/picture?type=square";
+            return "//graph.facebook.com/" . $this->social_account()->first()->provider_user_id . "/picture?type=square&width=150&height=150";
         }
+    }
+
+    public function cover() {
+        $url = "https://graph.facebook.com/" . $this->social_account()->first()->provider_user_id . "/?fields=cover&access_token=" . Session::get('token');
+
+        $facebook = file_get_contents($url);
+        $json = json_decode($facebook);
+        // dd($json);
+
+        // TODO: refactor this into different methods
+        $offset = $json->cover->offset_y == 0 ? "center" : "-" . $json->cover->offset_y . "px";
+        return "background-image: url(\"" . $json->cover->source . "\"); background-position: center center";
     }
 
     public function isAdmin()

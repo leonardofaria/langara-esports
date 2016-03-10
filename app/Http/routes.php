@@ -44,5 +44,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('home', ['as' => 'home', 'uses' => 'PagesController@home']);
     Route::get('profile', ['as' => 'profile', 'uses' => 'PagesController@profile']);
     Route::post('favourites', ['as' => 'favourites', 'uses' => 'PagesController@favourites']);
+    Route::post('participants', ['as' => 'participants', 'uses' => 'PagesController@participants']);
 
 });

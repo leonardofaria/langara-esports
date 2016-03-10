@@ -12,19 +12,25 @@ class Event extends Model
         'description',
         'official',
         'game_id',
-        'played_at',
+        'started_at',
+        'ended_at'
     ];
 
-    protected $dates = ['played_at'];
+    protected $dates = ['started_at', 'ended_at'];
 
-    public function setPublishedAttribute($date)
+    public function setStartedAtAttribute($date)
     {
-        $this->attributes['played_at'] = Carbon::parse($date);
+        $this->attributes['started_at'] = Carbon::parse($date);
+    }
+
+    public function setEndedAtAttribute($date)
+    {
+        $this->attributes['ended_at'] = Carbon::parse($date);
     }
 
     public function scopeFuture($query)
     {
-        $query->where('played_at', '>', Carbon::now());
+        $query->where('started_at', '>', Carbon::now());
     }
 
     /**
@@ -38,6 +44,11 @@ class Event extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function participants()
+    {
+        return $this->hasMany('App\Participant');
     }
 
 }

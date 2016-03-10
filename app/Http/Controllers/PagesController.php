@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Game;
 use App\Event;
+use App\Participant;
 use Flash;
 
 class PagesController extends Controller
@@ -20,13 +21,21 @@ class PagesController extends Controller
         if ($this->user) {
             $user = $this->user;
             $games = Game::all();
-            $events = Event::latest('created_at')->future()->get();
+            $all_events = Event::latest('created_at')->future()->get();
 
-            if (count($user->games) == 0) {
-                Flash::info('Select one or more games to get info about next events');
+            $liked_games = [];
+            foreach($user->games as $game) {
+                $liked_games[] = $game->id;
             }
 
-            return view('pages/timeline', compact('user', 'games', 'events'));
+            $my_events = [];
+            foreach ($all_events as $event) {
+                if (in_array($event->game->id, $liked_games)) {
+                    $my_events[] = $event;
+                }
+            }
+
+            return view('pages/timeline', compact('user', 'games', 'all_events', 'liked_games', 'my_events'));
         } else {
             return view('pages/home');
         }
@@ -37,16 +46,37 @@ class PagesController extends Controller
         $user = $this->user;
         $games = Game::all();
 
-        return view('pages/profile', compact('user', 'games'));
+        $liked_games = [];
+        foreach($user->games as $game) {
+            $liked_games[] = $game->id;
+        }
+
+        return view('pages/profile', compact('user', 'games', 'liked_games'));
 
     }
 
     public function favourites(Request $request) {
 
         $games = $request->input('games');
-        $this->user->games()->attach($games);
+        $this->user->games()->sync($games);
 
         Flash::success('Your favourites games have been saved!');
+
+        return redirect(route('home'));
+
+    }
+
+    public function participants(Request $request) {
+
+        $participant = Participant::where(['event_id' => $request->input('event_id'), 'user_id' => $this->user->id]);
+
+        if ($participant->count() > 0) {
+            $participant->first()->update(['participant' => $request->input('participant')]);
+        } else {
+            Participant::create(['event_id' => $request->input('event_id'), 'user_id' => $this->user->id, 'participant' => $request->input('participant')]);
+        }
+
+        Flash::success('Your data have been saved!');
 
         return redirect(route('home'));
 

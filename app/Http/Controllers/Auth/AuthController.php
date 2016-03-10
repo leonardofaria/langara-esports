@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\SocialAccount;
 use App\Admin;
+use Session;
 
 class AuthController extends Controller
 {
@@ -31,6 +32,8 @@ class AuthController extends Controller
     public function handleProviderCallback($provider)
     {
         $user = Socialite::driver($provider)->user();
+
+        Session::put('token', $user->token);
 
         $data = [
             'name' => $user->getName(),

@@ -25,6 +25,8 @@ class GameRequest extends Request
     {
         return [
             'name' => 'required',
+            'avatar' => 'required',
+            'cover' => 'required',
         ];
     }
 }
