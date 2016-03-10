@@ -24,7 +24,14 @@ class AdminRequest extends Request
     public function rules()
     {
         return [
-            'user_id' => 'required',
+            'user_id' => 'required|unique:admins',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'user_id.unique' => 'This user is already an administrator',
         ];
     }
 }
