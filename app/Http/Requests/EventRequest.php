@@ -25,7 +25,8 @@ class EventRequest extends Request
     {
         return [
             'game_id' => 'required',
-            'played_at' => 'required',
+            'started_at' => 'required',
+            'ended_at' => 'required',
         ];
     }
 }

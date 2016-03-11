@@ -6,7 +6,7 @@
 
     @include('errors.list')
 
-    {!! Form::open(['url' => 'events']) !!}
+    {!! Form::open(['url' => 'events', 'novalidate' => 'novalidate']) !!}
 
         @include('events._form', ['submitButtonText' => 'Add Event'])
 
