@@ -38,7 +38,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        $games = Game::lists('name', 'id');
+        $games = Game::all();
 
         return view('events.create', compact('games'));
     }
@@ -56,7 +56,7 @@ class EventsController extends Controller
 
         Flash::success('The event has been created!');
 
-        return redirect('events');
+        return redirect('home');
     }
 
     /**
