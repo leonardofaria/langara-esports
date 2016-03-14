@@ -18,6 +18,7 @@ class CreateGamesTable extends Migration
             $table->string('avatar');
             $table->string('cover');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('game_user', function (Blueprint $table) {

@@ -31,6 +31,7 @@ class CreateEventsTable extends Migration
                   ->on('users')
                   ->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('event_user', function (Blueprint $table) {

@@ -113,7 +113,13 @@ class AdminsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+
+        if ($admin->delete()) {
+            Flash::success('The admin has been deleted!');
+            return redirect('admins');
+        }
+
     }
 
 }
