@@ -17,6 +17,7 @@
     <input type="filepicker" data-fp-apikey="A9vnij5tuSn2WuyPErS9Rz" onchange="document.getElementById('cover').value = event.fpfile.url">
 </div>
 
-<div class="form-group">
-    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
-</div>
+<button class="save-button add" type="submit">
+    <span class="ion-ios-download"></span>
+    {{ $submitButtonText }}
+</button>

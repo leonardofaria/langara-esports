@@ -1,7 +1,6 @@
+@import "normalize";
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100);
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css";
-@import "profile-styles";
-
-
 
 /* ---------------------------------------------------------------- */
 /* REUSABLE COMPONENTS */
@@ -26,26 +25,26 @@ header {
     align-items: center;
     height: 100vh;
     background-color: #4e4e4e;
-    
-    
+
+
     background: #c2e59c; /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #c2e59c , #64b3f4); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #c2e59c , #64b3f4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .header-background {
-    
+
     flex: 6;
     flex: 0 1 600px;
     background-color: rgba(255, 255, 255, 0.12);
     display: flex;
     margin: 5%;
     align-items: center;
-    
+
     -webkit-box-shadow: 0px 7px 21px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 7px 21px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 7px 51px 0px rgba(0,0,0,0.1);
-    
+
 }
 
 .header-background > *{
@@ -54,7 +53,7 @@ header {
 }
 
 .tagline {
-    
+
 /*    flex: 2;*/
     display: flex;
 /*    justify-content: center;*/
@@ -64,7 +63,7 @@ header {
 }
 
 .tagline h1{
-    
+
     font-size: 2.1rem;
     font-weight: 100;
     color: #ffffff;
@@ -78,7 +77,7 @@ header {
 
 
 .facebook-button{
-    
+
 /*    text-align: center;*/
     display: flex;
     border: none;
@@ -89,10 +88,10 @@ header {
     align-items: center;
     border-radius: 5px;
     color: #2c2c2c;
-    transition: all 0.2s ease-in-out;   
+    transition: all 0.2s ease-in-out;
 }
 
-.facebook-button > *{ 
+.facebook-button > *{
     margin: 5px;
 }
 
@@ -148,7 +147,7 @@ video{
 
 .app-introduction{
     display: flex;
-    
+
 }
 .introduction-wrapper {
     display: flex;
@@ -184,18 +183,18 @@ video{
 
 
 @media screen and (max-width:800px){
-    
+
     .header-background {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .header-background .logo{
         width:200px;
     }
-    
+
     .tagline {
-    
+
 
     justify-content: center;
 

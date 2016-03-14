@@ -1,15 +1,17 @@
 @extends('app')
 
 @section('content')
+    <div class="admin">
 
-    <h1>Edit {!! $game->name !!}</h1>
+        <h2>Edit {!! $game->name !!}</h2>
 
-    @include('errors.list')
+        @include('errors.list')
 
-    {!! Form::model($game, ['method' => 'PATCH', 'action' => ['GamesController@update', $game]]) !!}
+        {!! Form::model($game, ['method' => 'PATCH', 'action' => ['GamesController@update', $game]]) !!}
 
-    @include('games._form', ['submitButtonText' => 'Update Game'])
+            @include('games._form', ['submitButtonText' => 'Update Game'])
 
-    {!! Form::close() !!}
+        {!! Form::close() !!}
 
+    </div>
 @stop

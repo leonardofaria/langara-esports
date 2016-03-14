@@ -4,7 +4,7 @@
     <title>Langara eSports</title>
     <link href="/css/app.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body class="flex-container">
 
 <div class="wrapper-main profile-page">
     <header>

@@ -1,5 +1,5 @@
 @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="validation">
         <b>Check the errors below:</b>
 
         <ul>
