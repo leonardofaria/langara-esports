@@ -2,17 +2,41 @@
 
 @section('content')
 
-    <h1>Showing {{ $game->name }}</h1>
+    <section class="cover-image" style="background-image: url('{{ $game->cover }}');">
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Next Events</h3>
+        <a href="/games/{{ $game->id }}">
+            <h1>{{ $game->name }}</h1>
+        </a>
+        <a href="/games/{{ $game->id }}">
+            <figure class="profile-image">
+                <img src="{{ $game->avatar }}" alt="{{ $game->name }}" />
+            </figure>
+        </a>
+
+    </section>
+
+    <section class="main-content">
+
+        <div class="event-buttons">
+            <a class="all-events"><i class="ion-earth"></i>All Events</a>
+            <a class="add-event"><i class="ion-android-add-circle"></i>Add Event</a>
         </div>
-        <div class="panel-body">
-            @foreach($events as $event)
-                @include('events._event')
-            @endforeach
+
+        <div class="content">
+            <div class="all-events">
+                @foreach($events as $event)
+                    @include('events._event')
+                @endforeach
+            </div>
+
+
+            <div class="add-event">
+                {!! Form::open(['url' => 'events', 'novalidate' => 'novalidate', 'class' => 'event-form']) !!}
+                    @include('events._form', ['submitButtonText' => 'Add Event'])
+                {!! Form::close() !!}
+            </div>
         </div>
-    </div>
+
+    </section>
 
 @stop

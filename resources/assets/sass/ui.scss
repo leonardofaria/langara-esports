@@ -4,6 +4,7 @@ $red: #ff5c29;
 .validation {
 	background: $red;
 	color: #fff;
+	font-size: 1rem;
 	margin-bottom: 50px;
 	padding: 20px;
 }
@@ -27,6 +28,7 @@ $red: #ff5c29;
 		border: 0;
 		color: #fff;
 		padding: 5px;
+		transition: 0.3s all;
 
 		&.btn-danger:hover {
 			background: $red;
@@ -43,12 +45,48 @@ $red: #ff5c29;
 
 		tr {
 			td {
-
+				text-align: center;
 			}
 		}
 	}
 
 	form {
+		label {
+			display: block;
+			color: #fff;
+	    font-weight: 100;
+	    font-size: 1rem;
+	    text-align: left;
+		}
+
+		input[type="text"], select, textarea, .preview {
+			text-align: left;
+	    background: rgba(255, 255, 255, 0.34);
+	    border: 1px solid #fff;
+	    margin-top: 5px;
+	    width: 500px;
+	    max-width: 100%;
+	    padding: 10px;
+	    font-size: 1rem;
+		}
+
+		.preview {
+			display: none;
+
+			img {
+				max-width: 100%;
+				height: auto;
+			}
+		}
+
+		textarea {
+			height: 150px;
+		}
+
+		input:focus, textarea:focus {
+			outline: 0;
+		}
+
 		.btn {
 			background: transparent;
 			width: 25px;

@@ -19,10 +19,10 @@
 
         <?php $style = !in_array($game->id, $liked_games) ? 'display: none' : ''; ?>
 
-        <figure class="game-logo" style="{{ $style }}">
+        <a href="/games/{{ $game->id }}" class="game-logo" style="{{ $style }}">
             <img src="{{ $game->avatar }}" alt="{{ $game->name }}">
-            <figcaption>{{ $game->name }}</figcaption>
-        </figure>
+            {{ $game->name }}
+        </a>
 
     @endforeach
 

@@ -1,3 +1,6 @@
+@include('errors.list')
+
+@if (isset($games))
 <section class="liked-games">
     <h2>Select a game</h2>
 
@@ -10,17 +13,19 @@
 
     </label>
     @endforeach
-
 </section>
+@else
+    {{ Form::radio('game_id', 0, null, ['id' => 'event_game_' . $game->id, 'class' => 'hide']) }}
+@endif
 
 <div class="form-group">
     {!! Form::label('name') !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('name') !!}
 </div>
 
 <div class="form-group">
     {!! Form::label('description') !!}
-    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('description') !!}
 </div>
 
 <div class="form-group">

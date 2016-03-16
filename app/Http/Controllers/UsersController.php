@@ -67,9 +67,15 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $games = $user->games;
         $events = Event::where(['user_id' => $id])->future()->get();
 
-        return view('users.show', compact('user', 'events'));
+        $liked_games = [];
+        foreach($user->games as $game) {
+            $liked_games[] = $game->id;
+        }
+
+        return view('users.show', compact('user', 'games', 'events', 'liked_games'));
     }
 
     /**

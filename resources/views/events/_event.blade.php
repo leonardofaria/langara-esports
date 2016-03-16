@@ -8,33 +8,30 @@
     <a href="" class="delete-button">
         <span class="ion-trash-a"></span>
     </a>
-    <figure class="game-logo">
-        <a href="/games/{{ $event->game()->first()->id }}">
-            <img src="{{ $event->game()->first()->avatar }}" alt="{{ $event->game()->first()->name }}">
-            <figcaption>{{ $event->game()->first()->name }}</figcaption>
-        </a>
-    </figure>
+
+    <a href="/games/{{ $event->game()->first()->id }}" class="game-logo">
+        <img src="{{ $event->game()->first()->avatar }}" alt="{{ $event->game()->first()->name }}">
+        {{ $event->game()->first()->name }}
+    </a>
+
     <a href="/events/{{ $event->id }}">
-        <h2>26th Mar</h2>
-        <h3>4:30am - 3:30am</h3>
+        <span class="day">26th Mar</span>
+        <span class="time">4:30am - 3:30am</span>
     </a>
-    <a href="/users/{{ $event->user()->first()->id }}" class="creator-picture">
-        <figure>
-            <img src="{{ $event->user()->first()->avatar() }}" alt="{{ $event->user()->first()->name }}">
-        </figure>
-        <p class="creator-name">{{ $event->user()->first()->name }}</p>
+
+    <a href="/users/{{ $event->user()->first()->id }}" class="author">
+        <img src="{{ $event->user()->first()->avatar() }}" alt="{{ $event->user()->first()->name }}">
+        <span>{{ $event->user()->first()->name }}</span>
     </a>
+
     <div class="title">
-        <h2>
-            @if ($event->title)
-            {{ $event->title }}
-            @else
-            {{ $event->game()->first()->name }}
-            @endif
-        </h2>
+        <h2>abc {{ $event->title }}</h2>
     </div>
-    {!! Form::model($user, ['method' => 'post', 'action' => 'PagesController@participants', 'class' => 'decision']) !!}
+
+    {!! Form::model(null, ['method' => 'post', 'action' => 'PagesController@participants', 'class' => 'decision']) !!}
         {!! Form::hidden('event_id', $event->id, ['class' => 'form-control']) !!}
+        {!! Form::radio('participant', 1, null, ['id' => 'event_yes_' . $event->id, 'class' => 'hide']) !!}
+        {!! Form::radio('participant', 0, null, ['id' => 'event_no_' . $event->id, 'class' => 'hide']) !!}
         <p>Join?</p>
         <a href="#" class="yes"><i class="ion-checkmark"></i></a>
         <a href="#" class="no"><i class="ion-close"></i></a>

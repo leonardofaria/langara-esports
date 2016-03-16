@@ -9,9 +9,7 @@
 <div class="wrapper-main profile-page">
     <header>
         <div class="wrapper-nav max-width">
-            <figure>
-                <a href="{{ route('home') }}"><img src="/images/logo.svg" alt=""></a>
-            </figure>
+            <a href="{{ route('home') }}" class="logo"><img src="/images/logo.svg"></a>
             <nav>
                 <ul>
                     @unless (Auth::check())

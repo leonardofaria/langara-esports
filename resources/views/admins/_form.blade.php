@@ -1,6 +1,6 @@
 <div class="form-group">
-    {!! Form::label('user_id') !!}
-    {!! Form::select('user_id', $users, null, ['class' => 'form-control']) !!}
+    {!! Form::label('user_id', 'User') !!}
+    {!! Form::select('user_id', $users) !!}
 </div>
 
 <button class="save-button add" type="submit">

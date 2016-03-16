@@ -9832,142 +9832,51 @@ return jQuery;
 
 $(document).ready(function(){
 
-    var decision = $(".decision");
-    var yes = decision.find(".yes");
-    var no = decision.find(".no");
-    var globalEvents = $(".global-events");
-    var myEventsButton = $(".personal-events");
-    var allGames = $(".wrapper-add-games");
-    var allGamesButton = $(".my-games-button");
-    var delButton = $(".delete-button");
-    var userMadeEvent = $(".user");
-    var addEventButton = $("#add-event");
-    var addEventTab = $(".add_event");
-
-    delButton.hide();
-    allGames.hide();
+    // Event box
+    var decision = $('.decision');
+    var yes = decision.find('.yes');
+    var no = decision.find('.no');
     decision.hide();
-    globalEvents.hide();
-    addEventTab.hide();
 
-//    switching between All Games. My Events and All Events
+    $('.event-buttons a').on('click', function() {
+        var className = $(this).attr('class');
 
-    addEventButton.on('click',function(event){
-
-        event.stopPropagation();
-        event.preventDefault();
-
-
-        $(".all-events").removeClass("event-buttons-hover");
-        myEventsButton.removeClass("event-buttons-hover");
-        allGamesButton.removeClass("event-buttons-hover");
-        addEventButton.addClass("event-buttons-hover");
-
-        globalEvents.hide();
-        $(".my-events").hide();
-        allGames.hide();
-        addEventTab.show();
-
+        $('.event-buttons a').removeClass('event-buttons-hover');
+        $(this).addClass('event-buttons-hover');
+        $('.content > div').hide();
+        $('.content .' + className).css('display', 'flex');
     });
 
+    $('.content > div').hide();
+    if ($('.content .my-events').length > 0) {
+        $('.content .my-events').show();
+        $('.event-buttons .my-events').addClass('active');
+    } else {
+        $('.content .all-events').show();
+        $('.event-buttons .all-events').addClass('active');
+    }
 
-    allGamesButton.on('click',function(event){
 
-
-        event.stopPropagation();
-        event.preventDefault();
-
-        $(".all-events").removeClass("event-buttons-hover");
-        myEventsButton.removeClass("event-buttons-hover");
-        addEventButton.removeClass("event-buttons-hover");
-        allGamesButton.addClass("event-buttons-hover");
-
-        globalEvents.hide();
-        $(".my-events").hide();
-        addEventTab.hide();
-        allGames.show();
-
+    $('.event').mouseenter(function(){
+        $(this).find('.decision').fadeIn(200);
+    }).mouseleave(function(){
+        $(this).find('.decision').fadeOut(200);
     });
 
-
-    $(".event-buttons").find(".all-events").on('click', function(event){
-
-
-        event.stopPropagation();
-        event.preventDefault();
-
-        allGamesButton.removeClass("event-buttons-hover");
-        myEventsButton.removeClass("event-buttons-hover");
-        addEventButton.removeClass("event-buttons-hover");
-        $(this).addClass("event-buttons-hover");
-
-//        $(".my-events").find(".event").addClass("four-column");
-        $(".my-events").hide();
-        addEventTab.hide();
-        globalEvents.show();
-    });
-
-    myEventsButton.on('click', function(event){
-
-        event.stopPropagation();
-        event.preventDefault();
-
-        allGamesButton.removeClass("event-buttons-hover");
-        $(".all-events").removeClass("event-buttons-hover");
-        addEventButton.removeClass("event-buttons-hover");
-        $(this).addClass("event-buttons-hover");
-
-        allGames.hide();
-        globalEvents.hide();
-        addEventTab.hide();
-        $(".my-events").show();
-
-    });
-
-    $(".event").mouseenter(function(){
-
-        $(this).find(".decision").fadeIn(200);
-
-    });
-
-//    joining the event
     yes.click(function(event){
-
         event.stopPropagation();
         event.preventDefault();
-
-        $(this).parent().parent().removeClass("not-going").addClass("going");
+        $(this).parent().parent().removeClass('not-going').addClass('going');
     });
 
-//    not going for the event
     no.click(function(event){
-
         event.stopPropagation();
         event.preventDefault();
-        $(this).parent().parent().removeClass("going").addClass("not-going");
-    });
-
-    $(".event").mouseleave(function(){
-
-        $(this).find(".decision").fadeOut(200);
-    });
-
-//    Event delete button
-    userMadeEvent.hover(function(){
-
-        $(this).find(".delete-button").fadeToggle(200);
-    });
-
-//    Delete button action
-    delButton.on('click',function(event){
-
-        event.stopPropagation();
-        event.preventDefault();
-        $(this).parent().fadeOut();
+        $(this).parent().parent().removeClass('going').addClass('not-going');
     });
 
 
-    //
+    // My games
     $('label.game :checkbox').on('click', function(event) {
         event.stopPropagation();
     });
@@ -9976,9 +9885,27 @@ $(document).ready(function(){
         $(this).toggleClass('selected');
     });
 
+
+    // New event
     $('label.game-logo').on('click', function(event) {
         $('label.game-logo').find('img').removeClass('selected');
         $(this).find('img').addClass('selected');
+    });
+
+
+    // Add game UI
+    preview = function(field, url) {
+        var img = '<img src="' + url + '" />';
+        $('#' + field).parent().find('.preview').html(img).slideDown();
+        $('#' + field).val(url);
+    };
+
+    $('#avatar, #cover').each(function() {
+        if ($(this).val() != '') {
+            preview($(this).attr('id'), $(this).val());
+        } else {
+            $(this).parent().find('.preview').hide();
+        }
     });
 
 });

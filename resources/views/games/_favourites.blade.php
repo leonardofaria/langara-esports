@@ -1,4 +1,4 @@
-<h3>Add the games you like to play</h3>
+<h2>Add the games you like to play</h2>
 
 {!! Form::model($user, ['method' => 'post', 'action' => 'PagesController@favourites']) !!}
 

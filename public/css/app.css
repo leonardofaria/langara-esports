@@ -543,6 +543,7 @@ th {
 .validation {
   background: #ff5c29;
   color: #fff;
+  font-size: 1rem;
   margin-bottom: 50px;
   padding: 20px; }
 
@@ -561,7 +562,8 @@ th {
     background: rgba(0, 0, 0, 0.43);
     border: 0;
     color: #fff;
-    padding: 5px; }
+    padding: 5px;
+    transition: 0.3s all; }
     .admin .btn.btn-danger:hover {
       background: #ff5c29; }
     .admin .btn.btn-primary:hover {
@@ -569,6 +571,32 @@ th {
   .admin .table {
     font-size: 1rem;
     width: 100%; }
+    .admin .table tr td {
+      text-align: center; }
+  .admin form label {
+    display: block;
+    color: #fff;
+    font-weight: 100;
+    font-size: 1rem;
+    text-align: left; }
+  .admin form input[type="text"], .admin form select, .admin form textarea, .admin form .preview {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.34);
+    border: 1px solid #fff;
+    margin-top: 5px;
+    width: 500px;
+    max-width: 100%;
+    padding: 10px;
+    font-size: 1rem; }
+  .admin form .preview {
+    display: none; }
+    .admin form .preview img {
+      max-width: 100%;
+      height: auto; }
+  .admin form textarea {
+    height: 150px; }
+  .admin form input:focus, .admin form textarea:focus {
+    outline: 0; }
   .admin form .btn {
     background: transparent;
     width: 25px;
@@ -612,7 +640,13 @@ th {
 body {
   font-family: Lato,Helvetica,"sans-serif";
   font-weight: 300;
-  font-size: 25px; }
+  font-size: 25px;
+  background: #43cea2;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #43cea2, #185a9d);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-repeat: no-repeat; }
 
 img {
   max-width: 100%;
@@ -627,16 +661,11 @@ a {
 /* ---------------------------------------------------------------- */
 /* REUSABLE COMPONENTS */
 /* ---------------------------------------------------------------- */
-.max-width {
+.max-width, .content {
   max-width: 1200px;
   margin: 0 auto; }
 
 .wrapper-main.profile-page {
-  background: #43cea2;
-  /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #43cea2, #185a9d);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   min-height: 100vh;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -648,8 +677,8 @@ a {
 /* ---------------------------------------------------------------- */
 /* HEADER */
 /* ---------------------------------------------------------------- */
-.profile-page header {
-  background-color: #000000; }
+header {
+  background: #000000; }
 
 .wrapper-nav {
   text-align: center;
@@ -659,53 +688,37 @@ a {
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between; }
-
-.wrapper-nav figure {
-  -webkit-flex: 0 0 50px;
-  -ms-flex: 0 0 50px;
-  flex: 0 0 50px;
-  margin: 5px; }
-
-.wrapper-nav nav {
-  /*    border: 1px solid yellow;*/
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto; }
-
-.wrapper-nav ul {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 80px; }
-
-.wrapper-nav ul li {
-  -webkit-flex: 0 1 120px;
-  -ms-flex: 0 1 120px;
-  flex: 0 1 120px; }
-
-.wrapper-nav ul li a {
-  color: white;
-  text-transform: uppercase;
-  font-size: 1rem; }
-
-.wrapper-nav ul li a:hover {
-  color: #4DD0E1; }
+  .wrapper-nav .logo {
+    -webkit-flex: 0 0 50px;
+    -ms-flex: 0 0 50px;
+    flex: 0 0 50px;
+    margin: 5px; }
+  .wrapper-nav nav {
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto; }
+    .wrapper-nav nav ul {
+      height: 80px;
+      line-height: 80px;
+      text-align: right; }
+      .wrapper-nav nav ul li {
+        display: inline-block; }
+        .wrapper-nav nav ul li a {
+          padding: 0 10px;
+          color: #fff;
+          text-transform: uppercase;
+          font-size: 1rem;
+          transition: all 0.5s; }
+          .wrapper-nav nav ul li a:hover {
+            color: #4DD0E1; }
+        .wrapper-nav nav ul li:last-of-type a {
+          font-size: 1.5rem; }
 
 /* ---------------------------------------------------------------- */
 /* COVER & PROFILE IMAGE */
 /* ---------------------------------------------------------------- */
 .cover-image {
   height: 300px;
-  background-image: url("../photos/cover.jpg");
   background-size: cover;
   background-position: center;
   display: -webkit-flex;
@@ -719,7 +732,8 @@ a {
   justify-content: flex-end;
   -webkit-align-items: center;
   -ms-flex-align: center;
-  align-items: center; }
+  align-items: center;
+  margin-bottom: 100px; }
 
 .profile-image {
   top: 80px;
@@ -744,33 +758,14 @@ a {
   top: 50px;
   padding: 20px 30px; }
 
-.event h2,
-.event h3 {
-  color: white; }
-
-h2 {
-  font-weight: 900;
-  font-size: 3rem; }
-
-.global-events h2 {
-  font-size: 2rem; }
-
-h3 {
-  font-weight: 100;
-  font-size: 1rem; }
-
 .main-content {
   margin: 0 2%;
   margin-bottom: 30px; }
-
-.ion-log-out {
-  font-size: 1.5rem; }
 
 /* ---------------------------------------------------------------- */
 /* LIKED GAMES */
 /* ---------------------------------------------------------------- */
 .liked-games {
-  margin-top: 100px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -782,73 +777,43 @@ h3 {
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.21);
   text-align: center;
-  color: white;
-  padding: 50px;
-  /*
-      -webkit-box-shadow: 0px 7px 21px 0px rgba(0,0,0,0.2);
-      -moz-box-shadow: 0px 7px 21px 0px rgba(0,0,0,0.2);
-      box-shadow: 0px 7px 51px 0px rgba(0,0,0,0.15);
-  */ }
+  color: #fff;
+  padding: 50px; }
+  .liked-games > * {
+    -webkit-flex: 0 0 100px;
+    -ms-flex: 0 0 100px;
+    flex: 0 0 100px;
+    margin: 10px;
+    -webkit-align-self: baseline;
+    -ms-flex-item-align: baseline;
+    align-self: baseline; }
+  .liked-games h2 {
+    -webkit-flex: 0 1 100%;
+    -ms-flex: 0 1 100%;
+    flex: 0 1 100%;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    font-weight: normal;
+    font-size: 2rem; }
 
-.liked-games > * {
-  -webkit-flex: 0 0 100px;
-  -ms-flex: 0 0 100px;
-  flex: 0 0 100px;
-  margin: 10px;
-  -webkit-align-self: baseline;
-  -ms-flex-item-align: baseline;
-  align-self: baseline; }
-
-.liked-games h2 {
-  -webkit-flex: 0 1 100%;
-  -ms-flex: 0 1 100%;
-  flex: 0 1 100%;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  font-weight: 900;
-  font-size: 2rem; }
+.game-logo {
+  color: #fff;
+  font-size: 1rem;
+  text-align: center; }
+  .game-logo img {
+    border: 6px solid rgba(116, 116, 116, 0.19);
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    transition: border 0.2s; }
+    .game-logo img.selected {
+      border-color: #e2c83b; }
 
 /* ---------------------------------------------------------------- */
 /* EVENTS CARD LAYOUT */
 /* ---------------------------------------------------------------- */
-.admin-post {
-  position: absolute;
-  font-size: 1rem;
-  font-weight: 400;
-  top: 10px;
-  left: 10px;
-  /*    right:0;*/
-  color: #2f2f2f;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  /*    flex-direction: column;*/
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  background-color: #dec820;
-  /*    border-radius: 5px;*/
-  padding: 5px; }
-
-.admin-post > * {
-  margin: 4px; }
-
-.admin-post p {
-  font-size: .7rem;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  text-transform: uppercase; }
-
-.admin-post span {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center; }
-
 .event-buttons {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -858,51 +823,37 @@ h3 {
   justify-content: center;
   margin-top: 40px;
   text-align: center; }
-
-.event-buttons a {
-  font-size: .7rem;
-  font-weight: 300;
-  margin: 10px;
-  margin-bottom: 0;
-  padding: 10px;
-  border: 2px solid #cccccc;
-  border-bottom: 0;
-  /*    background-color: rgba(255, 249, 249, 0.65);*/
-  transition: background-color .2s, color .2s;
-  -webkit-flex: 0 1 120px;
-  -ms-flex: 0 1 120px;
-  flex: 0 1 120px; }
-
-.event-buttons a:hover {
-  background-color: #FF8A65;
-  color: white;
-  border: 2px solid #FF8A65;
-  border-bottom: 0; }
-
-.event-buttons-hover {
-  background-color: rgba(255, 255, 255, 0.34);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.34);
-  border-bottom: 0; }
-
-.event-buttons i {
-  margin: 5px;
-  display: block;
-  text-align: center;
-  font-size: 2rem;
-  color: white; }
-
-.event-buttons a {
-  color: white; }
-
-.my-events, .global-events {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  background-color: rgba(255, 255, 255, 0.34); }
+  .event-buttons a {
+    color: #fff;
+    cursor: pointer;
+    font-size: .7rem;
+    font-weight: 300;
+    margin: 10px;
+    margin-bottom: 0;
+    padding: 10px;
+    border: 2px solid #cccccc;
+    border-bottom: 0;
+    /*    background-color: rgba(255, 249, 249, 0.65);*/
+    transition: background-color .2s, color .2s;
+    -webkit-flex: 0 1 120px;
+    -ms-flex: 0 1 120px;
+    flex: 0 1 120px; }
+    .event-buttons a:hover {
+      background-color: #FF8A65;
+      color: #fff;
+      border: 2px solid #FF8A65;
+      border-bottom: 0; }
+    .event-buttons a i {
+      margin: 5px;
+      display: block;
+      text-align: center;
+      font-size: 2rem;
+      color: #fff; }
+    .event-buttons a.active {
+      background-color: rgba(255, 255, 255, 0.34);
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.34);
+      border-bottom: 0; }
 
 .event {
   position: relative;
@@ -926,198 +877,190 @@ h3 {
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  /*    border: 6px solid white;*/ }
-  .event a:hover {
-    text-decoration: underline; }
+  /*    border: 6px solid #fff;*/ }
+  .event a {
+    color: #fff; }
+    .event a:hover {
+      text-decoration: underline; }
+  .event .admin-post {
+    position: absolute;
+    font-size: 1rem;
+    font-weight: 400;
+    top: 10px;
+    left: 10px;
+    color: #2f2f2f;
+    background: #dec820;
+    padding: 5px; }
+    .event .admin-post > * {
+      margin: 4px; }
+    .event .admin-post p {
+      font-size: .7rem;
+      -webkit-align-self: center;
+      -ms-flex-item-align: center;
+      align-self: center;
+      text-transform: uppercase; }
+    .event .admin-post span {
+      -webkit-align-self: center;
+      -ms-flex-item-align: center;
+      align-self: center; }
+  .event .game-logo {
+    margin: 1em 40px; }
+  .event .delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.29);
+    padding: 2%;
+    border-radius: 5px;
+    transition: background-color 0.2s; }
+    .event .delete-button:hover {
+      background-color: #ff5c29; }
+  .event .day {
+    display: block;
+    font-size: 2rem; }
+  .event .time {
+    display: block;
+    font-size: 1rem; }
+  .event .author {
+    color: #fff;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    margin: 50px 0 0 0;
+    padding: 20px;
+    width: 100%; }
+    .event .author img {
+      border-radius: 50%;
+      -webkit-flex: 0 0 50px;
+      -ms-flex: 0 0 50px;
+      flex: 0 0 50px;
+      height: 50px;
+      margin: 10px;
+      width: 50px; }
+    .event .author span {
+      -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+      font-size: 1rem;
+      margin: 10px; }
+  .event .title {
+    min-height: 60px;
+    background-color: #e4e4e4;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    /*    flex:1;*/
+    width: 100%;
+    padding: 10px; }
+    .event .title h2 {
+      color: black;
+      font-weight: 300;
+      font-size: 1rem;
+      margin: 0; }
+  .event .decision {
+    padding: 0;
+    /* added */
+    position: absolute;
+    min-height: 60px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    background-color: rgba(3, 3, 3, 0.95); }
+    .event .decision a {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      color: #ffffff;
+      -webkit-align-self: center;
+      -ms-flex-item-align: center;
+      align-self: center;
+      /*    margin-top: 20px;*/
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      min-height: 100%;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center; }
+    .event .decision p {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      font-size: 1.3rem; }
+    .event .decision .yes {
+      transition: background 0.2s; }
+      .event .decision .yes:hover {
+        background: #AED581; }
+    .event .decision .no {
+      transition: background 0.2s; }
+      .event .decision .no:hover {
+        background: #FF8A65; }
+    .event .decision i {
+      font-size: 1.5rem;
+      padding: 15px 0; }
+  .event.going {
+    border: 6px solid #aed581; }
+  .event.not-going {
+    border: 6px solid #FF8A65; }
 
-.delete-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: white;
-  text-decoration: none;
-  font-size: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.29);
-  padding: 2%;
-  /*
-      height: 40px;
-      width: 40px;
-  */
-  border-radius: 5px;
-  transition: background-color 0.2s; }
-
-.delete-button:hover {
-  background-color: #ff5c29; }
-
-.title {
-  min-height: 60px;
-  background-color: #e4e4e4;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  /*    flex:1;*/
-  width: 100%;
-  padding: 10px; }
-
-.title h2 {
-  font-weight: 300;
-  font-size: 1rem;
-  /*    padding: 20px;*/
-  color: black; }
-
-/*.creator-picture*/
-.global-events .event {
+.all-events .event, .four-column {
   -webkit-flex: 0 1 calc(25% - 20px);
   -ms-flex: 0 1 calc(25% - 20px);
   flex: 0 1 calc(25% - 20px); }
 
-.four-column {
-  -webkit-flex: 0 1 calc(25% - 20px);
-  -ms-flex: 0 1 calc(25% - 20px);
-  flex: 0 1 calc(25% - 20px); }
-
-/*----- DECISION EFFECTS -----*/
-.decision {
-  padding: 0;
-  /* added */
-  position: absolute;
-  min-height: 60px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  color: white;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  background-color: rgba(3, 3, 3, 0.95); }
-
-.decision a {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  color: #ffffff;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-  /*    margin-top: 20px;*/
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 100%;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center; }
-
-.decision p {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  font-size: 1.3rem; }
-
-/*
-.decision a:first-child{
-
-    flex: 0 1 100%;
-    align-self: center;
-}
-
-*/
-.decision i {
-  font-size: 1.5rem;
-  padding: 15px 0; }
-
-.yes {
-  transition: background-color 0.2s; }
-
-.yes:hover {
-  background-color: #AED581; }
-
-.no {
-  transition: background-color 0.2s; }
-
-.no:hover {
-  background-color: #FF8A65; }
-
-.game-logo {
-  text-align: center; }
-
-.game-logo img {
-  border-radius: 50%;
-  width: 80px;
-  border: 6px solid rgba(116, 116, 116, 0.19);
-  transition: border 0.2s; }
-
-.game-logo img.selected {
-  border-color: #e2c83b; }
-
-.game-logo figcaption {
-  color: white;
-  font-size: 1rem; }
-
-.creator-picture {
-  color: white;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  margin: 0;
-  margin-top: 50px;
-  padding: 20px;
-  transition: background-color 0.5s; }
-
-.creator-picture:hover {
-  border: 2px white; }
-
-.creator-picture p {
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  font-size: 1rem;
-  margin: 10px; }
-
-.creator-picture img {
-  border-radius: 50%; }
-
-.creator-picture figure {
-  -webkit-flex: 0 0 50px;
-  -ms-flex: 0 0 50px;
-  flex: 0 0 50px;
-  margin: 10px; }
-
-.going {
-  border: 6px solid #aed581; }
-
-.not-going {
-  border: 6px solid #FF8A65; }
+.content {
+  background: rgba(255, 255, 255, 0.34); }
+  .content .my-events, .content .all-events {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+  .content h2 {
+    color: #fff;
+    font-weight: 100;
+    font-size: 2.5rem;
+    margin: 40px; }
+  .content form input:focus, .content form textarea:focus {
+    outline: none; }
 
 /* ---------------------------------------------------------------- */
 /* ADD GAMES */
 /* ---------------------------------------------------------------- */
-.wrapper-add-games {
+.my-games {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -1128,14 +1071,7 @@ h3 {
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: 80px;
-  background-color: rgba(255, 255, 255, 0.34);
   text-align: center; }
-
-.wrapper-add-games h3 {
-  color: white;
-  font-weight: 100;
-  font-size: 2.5rem;
-  margin: 40px; }
 
 .choose-game {
   display: -webkit-flex;
@@ -1176,14 +1112,14 @@ h3 {
   /*    border-radius: 10px;*/ }
 
 .game h2 {
-  color: white;
+  color: #fff;
   font-size: 1.5rem;
   margin: 5%;
   /*    background-color: rgba(0, 0, 0, 0.33);*/
   /*    text-transform: uppercase;*/ }
 
 .mygames .game-logo img,
-.wrapper-add-games .game-logo img {
+.my-games .game-logo img {
   height: 100px;
   /* added */
   width: 100px; }
@@ -1233,7 +1169,7 @@ h3 {
   -ms-flex-align: center;
   align-items: center;
   border: none;
-  color: white;
+  color: #fff;
   margin: 20px auto 40px auto;
   border-radius: 3px;
   font-size: 1rem;
@@ -1242,15 +1178,12 @@ h3 {
   padding: 5px 10px;
   text-transform: uppercase;
   transition: background-color 0.2s; }
-
-.save-button:hover {
-  background-color: #8BC34A; }
-
-.save-button span {
-  font-size: 2rem; }
-
-.save-button > * {
-  margin: 5px; }
+  .save-button:hover {
+    background-color: #8BC34A; }
+  .save-button > * {
+    margin: 5px; }
+  .save-button span {
+    font-size: 2rem; }
 
 /* ---------------------------------------------------------------- */
 /* FOOTER */
@@ -1286,227 +1219,44 @@ footer {
   font-size: 2rem;
   margin: 60px;
   font-weight: 300;
-  color: white; }
-
-/* ---------------------------------------------------------------- */
-/* HOME PAGE CSS */
-/* ---------------------------------------------------------------- */
-.home-page section {
-  padding: 80px 0; }
-
-.home-header {
-  position: relative;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  /*    flex-direction: column;*/
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #4e4e4e;
-  background: #c2e59c;
-  /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #c2e59c, #64b3f4);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
-
-.header-background {
-  -webkit-flex: 6;
-  -ms-flex: 6;
-  flex: 6;
-  -webkit-flex: 0 1 600px;
-  -ms-flex: 0 1 600px;
-  flex: 0 1 600px;
-  background-color: rgba(255, 255, 255, 0.12);
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 5%;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  box-shadow: 0px 7px 51px 0px rgba(0, 0, 0, 0.1); }
-
-.header-background > * {
-  -webkit-flex: 0 1 calc(50% - 40px);
-  -ms-flex: 0 1 calc(50% - 40px);
-  flex: 0 1 calc(50% - 40px);
-  margin: 20px; }
-
-.tagline {
-  /*    flex: 2;*/
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  /*    justify-content: center;*/
-  -webkit-align-items: flex-end;
-  -ms-flex-align: end;
-  align-items: flex-end;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  /*    align-content: center;*/ }
-
-.tagline h1 {
-  font-size: 2.1rem;
-  font-weight: 100;
-  color: #ffffff;
-  margin: auto 5%; }
-
-.sign-in {
-  margin: auto 5%; }
-
-.facebook-button {
-  /*    text-align: center;*/
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.67);
-  width: 180px;
-  margin-top: 30px;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 5px;
-  color: #2c2c2c;
-  transition: all 0.2s ease-in-out; }
-
-.facebook-button > * {
-  margin: 5px; }
-
-.facebook-button:hover {
-  background-color: #3b5999;
-  color: white; }
-
-.facebook-button i {
-  font-size: 1.8rem; }
-
-.facebook-button p {
-  font-size: .8rem; }
-
-.scroll-down {
-  bottom: 30px;
-  left: 0;
-  right: 0;
-  position: absolute;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  color: white; }
-
-.scroll-down h2 {
-  font-weight: 300;
-  font-size: 1rem; }
-
-.scroll-down i {
-  margin-top: 5px;
-  font-size: 1.5rem; }
-
-/*----- Introduction to app -----*/
-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  min-height: 100%;
-  min-width: 100%; }
-
-.app-introduction {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex; }
-
-.introduction-wrapper {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  text-align: center;
-  margin: auto 10%;
-  /*    margin: auto 20%;*/ }
-
-.introduction-wrapper h2, h3 {
-  color: black; }
-
-.introduction-wrapper h2 {
-  font-weight: 900;
-  font-size: 2rem;
-  margin: 20px auto; }
-
-.introduction-wrapper h3 {
-  font-weight: 100;
-  font-size: 3rem; }
-
-.app-introduction {
-  position: relative; }
+  color: #fff; }
 
 /* ---------------------------------------------------------------- */
 /* ADD EVENT CSS */
 /* ---------------------------------------------------------------- */
-form {
+form.event-form {
   font-size: 20px;
-  text-align: center; }
-
-label {
-  /* width: 200px; */
-  display: block;
-  color: white;
-  font-weight: 100;
-  font-size: 1rem;
-  text-align: left; }
-
-form textarea,
-form input[type="text"] {
-  text-align: left;
-  background: rgba(255, 255, 255, 0.34);
-  border: 1px solid white;
-  margin-top: 5px;
-  width: 500px;
-  max-width: 100%;
-  padding: 10px;
-  font-size: 1rem; }
-
-#description {
-  height: 150px; }
+  text-align: center;
+  width: 100%; }
+  form.event-form .liked-games {
+    background: none;
+    margin: 0;
+    padding: 0; }
+  form.event-form .form-group:first-of-type {
+    margin-top: 40px; }
+  form.event-form label {
+    display: block;
+    color: #fff;
+    font-weight: 100;
+    font-size: 1rem;
+    text-align: left; }
+  form.event-form label.game-logo {
+    text-align: center; }
+  form.event-form textarea,
+  form.event-form input[type="text"] {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.34);
+    border: 1px solid #fff;
+    margin-top: 5px;
+    width: 500px;
+    max-width: 100%;
+    padding: 10px;
+    font-size: 1rem; }
+  form.event-form #description {
+    height: 150px; }
 
 .add_event {
   background-color: rgba(255, 255, 255, 0.34); }
-
-.add_event .liked-games {
-  background: none;
-  margin: 0;
-  padding-bottom: 0; }
-
-.liked-games h2 {
-  font-weight: 100;
-  font-size: 2rem; }
 
 .form-group {
   padding-bottom: 10px;
@@ -1521,14 +1271,14 @@ form input[type="text"] {
 /* MEDIA QUERIES */
 /* ---------------------------------------------------------------- */
 @media screen and (max-width: 1000px) {
-  .global-events .event {
+  .all-events .event {
     -webkit-flex: 0 1 calc(33.333% - 20px);
     -ms-flex: 0 1 calc(33.333% - 20px);
     flex: 0 1 calc(33.333% - 20px); } }
 
 @media screen and (max-width: 900px) {
   .event,
-  .global-events .event {
+  .all-events .event {
     -webkit-flex: 0 1 calc(50% - 20px);
     -ms-flex: 0 1 calc(50% - 20px);
     flex: 0 1 calc(50% - 20px); }
@@ -1552,7 +1302,7 @@ form input[type="text"] {
 
 @media screen and (max-width: 600px) {
   .event,
-  .global-events .event {
+  .all-events .event {
     -webkit-flex: 0 1 calc(100% - 20px);
     -ms-flex: 0 1 calc(100% - 20px);
     flex: 0 1 calc(100% - 20px); }

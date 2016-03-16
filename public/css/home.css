@@ -4,7 +4,7 @@
  * 2. Prevent iOS and IE text size adjust after device orientation change,
  *    without disabling user zoom.
  */
-@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100);
+@import "https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css";
 html {
   font-family: sans-serif;
@@ -358,6 +358,19 @@ th {
 /* ---------------------------------------------------------------- */
 /* REUSABLE COMPONENTS */
 /* ---------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: Lato,Helvetica,"sans-serif";
+  font-weight: 300;
+  font-size: 25px; }
+
+a {
+  text-decoration: none; }
+
 section {
   padding: 80px 0; }
 

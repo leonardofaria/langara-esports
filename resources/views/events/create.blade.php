@@ -4,9 +4,7 @@
 
     <h1>New event</h1>
 
-    @include('errors.list')
-
-    {!! Form::open(['url' => 'events', 'novalidate' => 'novalidate']) !!}
+    {!! Form::open(['url' => 'events', 'novalidate' => 'novalidate', 'class' => 'event-form']) !!}
 
         @include('events._form', ['submitButtonText' => 'Add Event'])
 
