@@ -27,6 +27,7 @@ class EventRequest extends Request
             'game_id' => 'required',
             'started_at' => 'required',
             'ended_at' => 'required',
+            'name' => 'required',
         ];
     }
 }

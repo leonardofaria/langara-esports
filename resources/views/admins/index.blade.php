@@ -9,6 +9,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Name</th>
                     <th>Actions</th>
                 </tr>
@@ -16,6 +17,7 @@
             <tbody>
             @foreach($admins as $admin)
                 <tr>
+                    <td><img src="{{ $admin->user()->first()->avatar() }}" alt="{{ $admin->user()->first()->name }}" class="avatar" /></td>
                     <td>
                         {{ $admin->user()->first()->name }}
                     </td>

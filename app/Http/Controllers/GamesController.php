@@ -111,7 +111,12 @@ class GamesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $game = Game::findOrFail($id);
+
+        if ($game->delete()) {
+            Flash::success('The game has been deleted!');
+            return redirect('games');
+        }
     }
 
 }

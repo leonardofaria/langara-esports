@@ -9841,19 +9841,20 @@ $(document).ready(function(){
     $('.event-buttons a').on('click', function() {
         var className = $(this).attr('class');
 
-        $('.event-buttons a').removeClass('event-buttons-hover');
-        $(this).addClass('event-buttons-hover');
+        $('.event-buttons a').removeClass('active');
+        $(this).addClass('active');
         $('.content > div').hide();
         $('.content .' + className).css('display', 'flex');
     });
 
     $('.content > div').hide();
     if ($('.content .my-events').length > 0) {
-        $('.content .my-events').show();
-        $('.event-buttons .my-events').addClass('active');
+        $('.event-buttons a')[1].click();
     } else {
-        $('.content .all-events').show();
-        $('.event-buttons .all-events').addClass('active');
+        $('.event-buttons a')[0].click();
+    }
+    if ($('.add-event .validation').length > 0) {
+        $('.event-buttons a')[3].click();
     }
 
 
@@ -9901,7 +9902,7 @@ $(document).ready(function(){
     };
 
     $('#avatar, #cover').each(function() {
-        if ($(this).val() != '') {
+        if ($(this).val() !== '') {
             preview($(this).attr('id'), $(this).val());
         } else {
             $(this).parent().find('.preview').hide();

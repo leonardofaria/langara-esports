@@ -2,12 +2,16 @@
 
 @section('content')
 
-    <h1>New event</h1>
+    <div class="admin">
 
-    {!! Form::open(['url' => 'events', 'novalidate' => 'novalidate', 'class' => 'event-form']) !!}
+        <h2>New event</h2>
 
-        @include('events._form', ['submitButtonText' => 'Add Event'])
+        {!! Form::open(['url' => 'events', 'novalidate' => 'novalidate', 'class' => 'event-form']) !!}
 
-    {!! Form::close() !!}
+            @include('events._form', ['submitButtonText' => 'Add Event'])
+
+        {!! Form::close() !!}
+
+    </div>
 
 @stop

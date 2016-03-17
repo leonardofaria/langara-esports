@@ -7,10 +7,8 @@
         <a href="/games/{{ $game->id }}">
             <h1>{{ $game->name }}</h1>
         </a>
-        <a href="/games/{{ $game->id }}">
-            <figure class="profile-image">
-                <img src="{{ $game->avatar }}" alt="{{ $game->name }}" />
-            </figure>
+        <a href="/games/{{ $game->id }}" class="profile-image">
+            <img src="{{ $game->avatar }}" alt="{{ $game->name }}" class="avatar" />
         </a>
 
     </section>

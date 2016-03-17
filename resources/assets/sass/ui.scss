@@ -23,6 +23,11 @@ $red: #ff5c29;
 		margin: 0 10px 50px 10px;
 	}
 
+	a {
+		color: #fff;
+		text-decoration: none;
+	}
+
 	.btn {
 		background: rgba(0, 0, 0, 0.43);
 		border: 0;
@@ -44,8 +49,19 @@ $red: #ff5c29;
 		width: 100%;
 
 		tr {
+			th {
+				font-size: 0.8rem;
+				font-weight: normal;
+				padding: 5px;
+				text-transform: uppercase;
+			}
+
 			td {
 				text-align: center;
+
+				a {
+					text-decoration: underline;
+				}
 			}
 		}
 	}
@@ -91,6 +107,14 @@ $red: #ff5c29;
 			background: transparent;
 			width: 25px;
 			text-align: center;
+		}
+	}
+
+	.liked-games {
+		background: transparent;
+
+		h2 {
+			display: none;
 		}
 	}
 }

@@ -16,7 +16,6 @@ class CreateAdminsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('user_id')
                 ->references('id')

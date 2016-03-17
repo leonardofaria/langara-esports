@@ -1,13 +1,17 @@
 <div class="event" style="background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1) ), url('{{ $event->game()->first()->cover }}');">
+
     @if ($event->official)
-    <div class="admin-post">
-       <span class="ion-android-star"></span>
-       <p>admin</p>
-    </div>
+        <div class="admin-post">
+           <span class="ion-android-star"></span>
+           <p>admin</p>
+        </div>
     @endif
-    <a href="" class="delete-button">
-        <span class="ion-trash-a"></span>
-    </a>
+
+    @if ($event->user()->first()->id === $user->id || $user->isAdmin())
+        {!! Form::open(['action' => ['EventsController@destroy', $event->id], 'method' => 'delete', 'class' => 'delete-form']) !!}
+            {!! Form::button('<span class="ion-trash-a"></span>', ['class'=> 'delete-button', 'type' => 'submit']) !!}
+        {!! Form::close() !!}
+    @endif
 
     <a href="/games/{{ $event->game()->first()->id }}" class="game-logo">
         <img src="{{ $event->game()->first()->avatar }}" alt="{{ $event->game()->first()->name }}">
@@ -25,7 +29,7 @@
     </a>
 
     <div class="title">
-        <h2>abc {{ $event->title }}</h2>
+        <h2>{{ $event->name ? $event->name : $event->game()->first()->name }}</h2>
     </div>
 
     {!! Form::model(null, ['method' => 'post', 'action' => 'PagesController@participants', 'class' => 'decision']) !!}

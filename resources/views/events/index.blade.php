@@ -1,36 +1,35 @@
 @extends('app')
 
 @section('content')
-    <h1>All the events</h1>
+    <div class="admin">
+        <a href="{{ URL::to('events/create') }}" class="btn btn-primary pull-right"><span class="ion-ios-plus-empty"></span></a>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($events as $event)
+        <h2>All the events</h2>
+
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{ $event->id }}</td>
-                <td>{{ $event->name }}</td>
-
-                <td>
-
-                    <!-- delete the event (uses the destroy method DESTROY /events/{id} -->
-                    <!-- we will add this later since its a little more complicated than the other two buttons -->
-
-                    <!-- show the event (uses the show method found at GET /events/{id} -->
-                    <a class="btn btn-small btn-success" href="{{ url('events/' . $event->id) }}">Show this Game</a>
-
-                    <!-- edit this event (uses the edit method found at GET /events/{id}/edit -->
-                    <a class="btn btn-small btn-info" href="{{ url('events/' . $event->id . '/edit') }}">Edit this Game</a>
-
-                </td>
+                <th></th>
+                <th>Name</th>
+                <th>Started at</th>
+                <th>Actions</th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach($events as $event)
+                <tr>
+                    <td><img src="{{ $event->game()->first()->avatar }}" alt="{{ $event->game()->first()->name }}" class="avatar"></td>
+                    <td><a href="/events/{{ $event->id }}">{{ $event->name }}</a></td>
+                    <td>{{ $event->started_at }}</td>
+
+                    <td>
+                        {!! Form::open(['action' => ['EventsController@destroy', $event->id], 'method' => 'delete']) !!}
+                            <a class="btn btn-primary" href="{{ url('events/' . $event->id . '/edit') }}"><span class="ion-edit"></span></a>{!! Form::button('<span class="ion-trash-a"></span>', ['class'=> 'btn btn-danger', 'type' => 'submit']) !!}
+                        {!! Form::close() !!}
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 @stop

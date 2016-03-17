@@ -3,10 +3,8 @@
     <a href="/users/{{ $user->id }}">
         <h1>{{ $user->name }}</h1>
     </a>
-    <a href="/users/{{ $user->id }}">
-        <figure class="profile-image">
-            <img src="{{ $user->avatar() }}" alt="{{ $user->name }}" />
-        </figure>
+    <a href="/users/{{ $user->id }}" class="profile-image">
+        <img src="{{ $user->avatar() }}" alt="{{ $user->name }}" class="avatar" />
     </a>
 
 </section>

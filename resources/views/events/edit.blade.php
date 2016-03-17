@@ -1,15 +1,17 @@
 @extends('app')
 
 @section('content')
+    <div class="admin">
 
-    <h1>Edit {!! $event->name !!}</h1>
+        <h2>Edit {!! $event->name !!}</h2>
 
-    @include('errors.list')
+        @include('errors.list')
 
-    {!! Form::model($event, ['method' => 'PATCH', 'action' => ['EventsController@update', $event]]) !!}
+        {!! Form::model($event, ['method' => 'PATCH', 'action' => ['EventsController@update', $event]]) !!}
 
-    @include('events._form', ['submitButtonText' => 'Update Game'])
+            @include('events._form', ['submitButtonText' => 'Update Game'])
 
-    {!! Form::close() !!}
+        {!! Form::close() !!}
 
+    </div>
 @stop

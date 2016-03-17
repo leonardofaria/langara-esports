@@ -81,7 +81,7 @@ class EventsController extends Controller
     public function edit($id)
     {
         $event = Event::findOrFail($id);
-        $games = Game::lists('name', 'id');
+        $games = Game::all();
 
         return view('events.edit', compact('event', 'games'));
     }
@@ -112,7 +112,12 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::findOrFail($id);
+
+        if ($event->delete()) {
+            Flash::success('The event has been deleted!');
+            return redirect()->back();
+        }
     }
 
 }

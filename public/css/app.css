@@ -558,6 +558,9 @@ th {
     font-size: 2rem;
     text-align: center;
     margin: 0 10px 50px 10px; }
+  .admin a {
+    color: #fff;
+    text-decoration: none; }
   .admin .btn {
     background: rgba(0, 0, 0, 0.43);
     border: 0;
@@ -571,8 +574,15 @@ th {
   .admin .table {
     font-size: 1rem;
     width: 100%; }
+    .admin .table tr th {
+      font-size: 0.8rem;
+      font-weight: normal;
+      padding: 5px;
+      text-transform: uppercase; }
     .admin .table tr td {
       text-align: center; }
+      .admin .table tr td a {
+        text-decoration: underline; }
   .admin form label {
     display: block;
     color: #fff;
@@ -601,6 +611,10 @@ th {
     background: transparent;
     width: 25px;
     text-align: center; }
+  .admin .liked-games {
+    background: transparent; }
+    .admin .liked-games h2 {
+      display: none; }
 
 .add_event form {
   padding: 40px; }
@@ -717,6 +731,12 @@ header {
 /* ---------------------------------------------------------------- */
 /* COVER & PROFILE IMAGE */
 /* ---------------------------------------------------------------- */
+.avatar {
+  border: 6px solid rgba(116, 116, 116, 0.19);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px; }
+
 .cover-image {
   height: 300px;
   background-size: cover;
@@ -734,30 +754,27 @@ header {
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: 100px; }
-
-.profile-image {
-  top: 80px;
-  position: relative;
-  width: 150px;
-  margin: 0; }
-
-.profile-image img {
-  border: 3px solid white;
-  border-radius: 50%; }
+  .cover-image h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    background-color: rgba(31, 31, 31, 0.85);
+    position: relative;
+    border-radius: 5px;
+    top: 50px;
+    padding: 20px 30px; }
+  .cover-image .profile-image {
+    top: 80px;
+    position: relative;
+    margin: 0; }
+    .cover-image .profile-image .avatar {
+      border: 3px solid white;
+      width: 150px;
+      height: 150px; }
 
 /* ---------------------------------------------------------------- */
 /* TYPOGRAPHY */
 /* ---------------------------------------------------------------- */
-.cover-image h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  background-color: rgba(31, 31, 31, 0.85);
-  position: relative;
-  border-radius: 5px;
-  top: 50px;
-  padding: 20px 30px; }
-
 .main-content {
   margin: 0 2%;
   margin-bottom: 30px; }
@@ -794,7 +811,7 @@ header {
     -webkit-align-self: center;
     -ms-flex-item-align: center;
     align-self: center;
-    font-weight: normal;
+    font-weight: 100;
     font-size: 2rem; }
 
 .game-logo {
@@ -905,19 +922,22 @@ header {
       align-self: center; }
   .event .game-logo {
     margin: 1em 40px; }
-  .event .delete-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.5rem;
-    background-color: rgba(0, 0, 0, 0.29);
-    padding: 2%;
-    border-radius: 5px;
-    transition: background-color 0.2s; }
-    .event .delete-button:hover {
-      background-color: #ff5c29; }
+  .event .delete-form {
+    display: none; }
+    .event .delete-form .delete-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.5rem;
+      background-color: rgba(0, 0, 0, 0.29);
+      border: 0;
+      padding: 2%;
+      border-radius: 5px;
+      transition: background-color 0.2s; }
+      .event .delete-form .delete-button:hover {
+        background-color: #ff5c29; }
   .event .day {
     display: block;
     font-size: 2rem; }
@@ -1034,6 +1054,8 @@ header {
     border: 6px solid #aed581; }
   .event.not-going {
     border: 6px solid #FF8A65; }
+  .event:hover .delete-form {
+    display: inline; }
 
 .all-events .event, .four-column {
   -webkit-flex: 0 1 calc(25% - 20px);

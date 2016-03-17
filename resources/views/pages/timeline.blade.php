@@ -22,9 +22,13 @@
 
 
             <div class="my-events">
-                @foreach($my_events as $event)
-                    @include('events._event')
-                @endforeach
+                @if ($my_events)
+                    @foreach($my_events as $event)
+                        @include('events._event')
+                    @endforeach
+                @else
+                    No new events coming.
+                @endif
             </div>
 
 
