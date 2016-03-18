@@ -66,11 +66,15 @@ class User extends Authenticatable
 
         $facebook = file_get_contents($url);
         $json = json_decode($facebook);
-        // dd($json);
 
-        // TODO: refactor this into different methods
-        $offset = $json->cover->offset_y == 0 ? "center" : "-" . $json->cover->offset_y . "px";
-        return "background-image: url(\"" . $json->cover->source . "\"); background-position: center center";
+        if (isset($json->cover)) {
+            $url = $json->cover->source;
+            $offset = $json->cover->offset_y == 0 ? "center" : "-" . $json->cover->offset_y . "px";
+        } else {
+            $url = 'http://trianglify-api.herokuapp.com/1200x400.png';
+        }
+
+        return "background-image: url(\"" . $url . "\"); background-position: center center";
     }
 
     public function isAdmin()
