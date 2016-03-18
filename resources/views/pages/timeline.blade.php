@@ -15,9 +15,13 @@
 
         <div class="content">
             <div class="all-events">
-                @foreach($all_events as $event)
-                    @include('events._event')
-                @endforeach
+                @if ($all_events)
+                    @foreach($all_events as $event)
+                        @include('events._event')
+                    @endforeach
+                @else
+                    <div class="no-events">No new events coming.</div>
+                @endif
             </div>
 
 
@@ -27,7 +31,7 @@
                         @include('events._event')
                     @endforeach
                 @else
-                    No new events coming.
+                    <div class="no-events">No new events coming.</div>
                 @endif
             </div>
 

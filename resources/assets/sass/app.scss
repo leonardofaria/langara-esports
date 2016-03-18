@@ -2,7 +2,14 @@
 @import url(http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100);
 @import "flatpickr.dark";
-@import "ui";
+
+/* ---------------------------------------------------------------- */
+/* VARIABLES */
+/* ---------------------------------------------------------------- */
+
+$green: rgba(174, 213, 129, 0.8);
+$red: #ff5c29;
+
 
 /* ---------------------------------------------------------------- */
 /* MAIN SETUP */
@@ -15,13 +22,14 @@
 }
 
 body {
-  font-family: Lato,Helvetica,"sans-serif";
+  font-family: Lato, Helvetica, "sans-serif";
   font-weight: 300;
   font-size: 25px;
   background: #43cea2; /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #43cea2 , #185a9d); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #43cea2 , #185a9d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 img {
@@ -46,12 +54,50 @@ a {
   margin: 0 auto;
 }
 
-.wrapper-main.profile-page{
+.wrapper-main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+.validation {
+  background: $red;
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 50px;
+  padding: 20px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  border: none;
+  color: #fff;
+  margin: 20px auto 40px auto;
+  border-radius: 3px;
+  font-size: 1rem;
+  font-weight: 400;
+  background-color: rgba(0, 0, 0, 0.43);
+  padding: 5px 10px;
+  text-transform: uppercase;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #8BC34A;
+  }
+
+  &.no:hover {
+    background-color: $red;
+  }
+
+  > * {
+    margin: 5px;
+  }
+
+  span[class] {
+    font-size: 2rem;
+  }
+}
 
 /* ---------------------------------------------------------------- */
 /* HEADER */
@@ -200,6 +246,7 @@ header {
     display: block;
     margin: 0 auto;
     width: 80px;
+    height: 80px;
     transition: border 0.2s;
 
     &.selected {
@@ -308,9 +355,10 @@ header {
   }
 
   .delete-form {
-    display: none;
+    display: inline;
 
-    .delete-button{
+    .delete-button {
+      display: none;
       position: absolute;
       top:10px;
       right:10px;
@@ -445,8 +493,8 @@ header {
   }
 
   &:hover {
-    .delete-form {
-      display: inline;
+    .delete-button {
+      display: inline-block;
     }
   }
 }
@@ -477,10 +525,18 @@ header {
       outline: none;
     }
   }
+
+  .no-events {
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+  }
 }
 
 /* ---------------------------------------------------------------- */
-/* ADD GAMES */
+/* MY GAMES */
 /* ---------------------------------------------------------------- */
 
 
@@ -490,142 +546,114 @@ header {
   align-items: center;
   margin-bottom: 80px;
   text-align: center;
-}
 
-.choose-game {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 10px;
-  justify-content: center;
-}
-
-.choose-game .game{
-  transition: border 0.1s;
-}
-
-.choose-game .game:hover, .choose-game .game.selected {
-  border: 6px solid #e2c83b;
-}
-
-.game{
-
-  flex:0 1 calc(25% - 20px);
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-position: center;
-  background-size: cover;
-  text-align: center;
-  height: 300px;
-  /*    border-radius: 10px;*/
-}
-
-.game h2{
-
-  color: #fff;
-  font-size: 1.5rem;
-  margin: 5%;
-  /*    background-color: rgba(0, 0, 0, 0.33);*/
-  /*    text-transform: uppercase;*/
-}
-
-.mygames .game-logo img,
-.my-games .game-logo img{
-  height: 100px; /* added */
-  width: 100px;
-}
-
-.done {
-  text-align: center;
-  display: flex;
-}
-
-.done h2{
-  flex: 0 0 200px;
-}
-
-.game-logo-wrapper {
-  flex:1;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.game-logo-wrapper > *{
-  align-self: baseline;
-  flex: 0 1 100px;
-  margin:10px;
-}
-
-.green-border{
-  border: 6px solid rgb(174, 213, 129);
-}
-
-.save-button{
-  display: flex;
-  align-items: center;
-  border: none;
-  color: #fff;
-  margin: 20px auto 40px auto;
-  border-radius: 3px;
-  font-size: 1rem;
-  font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.43);
-  padding: 5px 10px;
-  text-transform: uppercase;
-  transition: background-color 0.2s;
-
-  &:hover{
-    background-color: #8BC34A;
+  .choose-game {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    justify-content: center;
   }
 
-  > *{
-    margin: 5px;
+  .choose-game .game{
+    transition: border 0.1s;
   }
 
-  span {
-    font-size: 2rem;
+  .choose-game .game:hover, .choose-game .game.selected {
+    border: 6px solid #e2c83b;
+  }
+
+  .game {
+    flex: 0 1 calc(25% - 20px);
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    height: 300px;
+
+    img {
+      height: 100px;
+      width: 100px;
+      margin: 0 auto;
+    }
+
+    span {
+      color: #fff;
+      font-size: 1.5rem;
+      margin: 5%;
+    }
+  }
+
+  .done {
+    text-align: center;
+    display: flex;
+  }
+
+  .done h2{
+    flex: 0 0 200px;
+  }
+
+  .green-border {
+    border: 6px solid $green;
   }
 }
 
 
 /* ---------------------------------------------------------------- */
-/* FOOTER */
+/* EVENT PAGE */
 /* ---------------------------------------------------------------- */
 
-footer{
-  background-color: black;
-  height: 60px;
-}
-
-/* ---------------------------------------------------------------- */
-/* MY GAMES CSS */
-/* ---------------------------------------------------------------- */
-
-
-.mygames{
-
-  background: #5f2c82; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #5f2c82 , #49a09d); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #5f2c82 , #49a09d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-.wrapper-mygames{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 80px;
-  text-align: center;
-}
-
-.mygames-header h1{
-  font-size: 2rem;
-  margin: 60px;
-  font-weight: 300;
+.event-details {
   color: #fff;
-}
 
+  .column {
+    float: left;
+    padding: 10px;
+    width: 50%;
+  }
+
+  .day {
+    display: block;
+    font-size: 6rem;
+    font-weight: 900;
+  }
+
+  .time {
+    display: block;
+    font-size: 3.3rem;
+    font-weight: 100;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+
+  form.decision {
+    display: flex;
+  }
+
+  .event-participants {
+    text-align: center;
+
+    img {
+      border: 3px solid rgb(255, 255, 255);
+
+      &.author {
+        height: 150px;
+        width: 150px;
+      }
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 100;
+      margin: 20px 0;
+    }
+  }
+}
 
 /* ---------------------------------------------------------------- */
 /* ADD EVENT CSS */
@@ -684,14 +712,10 @@ form.event-form {
 
 .form-group {
   padding-bottom: 10px;
-  width: 500px;
+  width: 500px !important;
   margin: 0 auto;
   text-align: left;
 
-}
-
-.add{
-  background-color: rgba(0, 0, 0, 0.43);
 }
 
 
@@ -757,38 +781,149 @@ form.event-form {
 
 }
 
-.event-created-message {
-  display:flex;
-  order: -1;
-  min-height: 100vh;
-  font-weight: 100;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  position: absolute;
+
+
+/* ---------------------------------------------------------------- */
+/* ADMIN PAGE */
+/* ---------------------------------------------------------------- */
+
+.admin {
+  background: rgba(255, 255, 255, 0.21);
+  color: #fff;
+  padding: 50px;
+  margin: 2%;
+
+  h2 {
+    color: #fff;
+    font-weight: 100;
+    font-size: 2rem;
+    text-align: center;
+    margin: 0 10px 50px 10px;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .btn {
+    &.new {
+      margin-top: 0;
+    }
+
+    &.btn-danger:hover {
+      background: $red;
+    }
+
+    &.btn-primary:hover {
+      background: $green;
+    }
+  }
+
+  .table {
+    font-size: 1rem;
+    width: 100%;
+
+    tr {
+      th {
+        font-size: 0.8rem;
+        font-weight: normal;
+        padding: 5px;
+        text-transform: uppercase;
+      }
+
+      td {
+        text-align: center;
+
+        .btn {
+          display: inline-block;
+          margin: 0 5px;
+          padding: 10px;
+          width: 45px;
+
+          span {
+            font-size: 1rem;
+            margin: 0;
+          }
+        }
+
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  form {
+    label {
+      display: block;
+      color: #fff;
+      font-weight: 100;
+      font-size: 1rem;
+      text-align: left;
+    }
+
+    input[type="text"], select, textarea, .preview {
+      text-align: left;
+      background: rgba(255, 255, 255, 0.34);
+      border: 1px solid #fff;
+      margin-top: 5px;
+      width: 500px;
+      max-width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    .preview {
+      display: none;
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    textarea {
+      height: 150px;
+    }
+
+    input:focus, textarea:focus {
+      outline: 0;
+    }
+  }
+
+  .liked-games {
+    background: transparent;
+
+    h2 {
+      display: none;
+    }
+  }
 }
 
-.event-created-message h1{
-  font-weight: 300;
-  width:100%;
-  font-size: 2rem;
-  color:#eaeaea;
-  text-align: center;
-  background-color: rgb(31, 31, 31);
-  padding: 7%;
-  animation: eventCreated 1.5s 3;
+.add_event form {
+  padding: 40px;
 }
 
-@keyframes eventCreated{
-  0%{
-    transform: scale(1.2);
+.alert {
+  color: #fff;
+  padding: 10px;
+
+  button {
+    background: transparent;
+    border: 0;
+    float: right;
   }
-  50%{
-    transform: scale(1);
+
+  &.alert-success {
+    background: $green;
   }
-  100%{
-    transform: scale(1.2);
-  }
+}
+
+.pull-right {
+  float: right;
+}
+
+.hide {
+  display: none;
 }

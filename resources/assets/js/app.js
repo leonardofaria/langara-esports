@@ -1,12 +1,38 @@
 $(document).ready(function(){
 
+    $.scrollTo = function (target, offset, speed, container) {
+        if (isNaN(target)) {
+            if (!(target instanceof jQuery))
+                target = $(target);
+            target = parseInt(target.offset().top);
+        }
+
+        container = container || "html, body";
+        if (!(container instanceof jQuery))
+            container = $(container);
+
+        speed = speed || 500;
+        offset = offset || 0;
+
+        container.animate({
+            scrollTop: target + offset
+        }, speed);
+    };
+
     // Event box
-    var decision = $('.decision');
+    var event = $('.event');
+    var decision = event.find('.decision');
     var yes = decision.find('.yes');
     var no = decision.find('.no');
     decision.hide();
 
-    $('.event-buttons a').on('click', function() {
+    $('.event').mouseenter(function(){
+        $(this).find('.decision').fadeIn(200);
+    }).mouseleave(function(){
+        $(this).find('.decision').fadeOut(200);
+    });
+
+    $('.event-buttons a').on('click', function(event) {
         var className = $(this).attr('class');
 
         $('.event-buttons a').removeClass('active');
@@ -17,32 +43,31 @@ $(document).ready(function(){
 
     $('.content > div').hide();
     if ($('.content .my-events').length > 0) {
-        $('.event-buttons a')[1].click();
+        $('.event-buttons a[class="my-events"]').click();
     } else {
         $('.event-buttons a')[0].click();
+        console.log('test');
     }
     if ($('.add-event .validation').length > 0) {
         $('.event-buttons a')[3].click();
     }
 
-
-    $('.event').mouseenter(function(){
-        $(this).find('.decision').fadeIn(200);
-    }).mouseleave(function(){
-        $(this).find('.decision').fadeOut(200);
-    });
-
-    yes.click(function(event){
+    yes.on('click', function(event){
         event.stopPropagation();
         event.preventDefault();
-        $(this).parent().parent().removeClass('not-going').addClass('going');
+        $(this).parent().find('.yes_radio').click();
+        $(this).parent().submit();
+        // $(this).parent().parent().removeClass('not-going').addClass('going');
     });
 
-    no.click(function(event){
+    no.on('click', function(event){
         event.stopPropagation();
         event.preventDefault();
-        $(this).parent().parent().removeClass('going').addClass('not-going');
+        $(this).parent().find('.no_radio').click();
+        $(this).parent().submit();
+        // $(this).parent().parent().removeClass('going').addClass('not-going');
     });
+
 
 
     // My games

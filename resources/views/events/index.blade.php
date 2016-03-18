@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="admin">
-        <a href="{{ URL::to('events/create') }}" class="btn btn-primary pull-right"><span class="ion-ios-plus-empty"></span></a>
+        <a href="{{ URL::to('events/create') }}" class="btn btn-primary pull-right new">
+            <span class="ion-ios-plus-empty"></span>
+            <span>New event</span>
+        </a>
 
         <h2>All the events</h2>
 
@@ -24,7 +27,7 @@
 
                     <td>
                         {!! Form::open(['action' => ['EventsController@destroy', $event->id], 'method' => 'delete']) !!}
-                            <a class="btn btn-primary" href="{{ url('events/' . $event->id . '/edit') }}"><span class="ion-edit"></span></a>{!! Form::button('<span class="ion-trash-a"></span>', ['class'=> 'btn btn-danger', 'type' => 'submit']) !!}
+                            <a class="btn btn-primary" href="{{ url('events/' . $event->id . '/edit') }}"><span class="ion-edit"></span></a>{!! Form::button('<span class="ion-trash-a"></span>', ['class'=> 'btn btn-danger', 'type' => 'submit', 'onclick' => 'return confirm("Are you sure?");']) !!}
                         {!! Form::close() !!}
                     </td>
                 </tr>

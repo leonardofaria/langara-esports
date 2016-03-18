@@ -68,8 +68,9 @@ class GamesController extends Controller
     {
         $game = Game::findOrFail($id);
         $events = Event::where(['game_id' => $id])->future()->get();
+        $user = $this->user;
 
-        return view('games.show', compact('game', 'events'));
+        return view('games.show', compact('game', 'events', 'user'));
     }
 
     /**

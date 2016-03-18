@@ -3,7 +3,7 @@
     {!! Form::select('user_id', $users) !!}
 </div>
 
-<button class="save-button add" type="submit">
+<button type="submit" class="btn">
     <span class="ion-archive"></span>
-    <p>Add Admin</p>
+    <span>Add Admin</span>
 </button>

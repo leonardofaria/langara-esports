@@ -22,9 +22,13 @@
 
         <div class="content">
             <div class="all-events">
-                @foreach($events as $event)
-                    @include('events._event')
-                @endforeach
+                @if ($events->count() > 0)
+                    @foreach($events as $event)
+                        @include('events._event')
+                    @endforeach
+                @else
+                    <div class="no-events">No new events coming.</div>
+                @endif
             </div>
 
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('users._user')
+@include('users._user')
 
     <section class="main-content">
 

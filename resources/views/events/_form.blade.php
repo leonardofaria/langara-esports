@@ -45,9 +45,9 @@
 </div>
 @endif
 
-<button class="save-button add" type="submit">
+<button class="btn" type="submit">
     <span class="ion-archive"></span>
-    Add Event
+    <span>Add Event</span>
 </button>
 
 <script type="text/javascript" src="/js/flatpickr.min.js"></script>

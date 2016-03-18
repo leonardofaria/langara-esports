@@ -2,8 +2,61 @@
 
 @section('content')
 
-    <h1>Showing {{ $event->name }}</h1>
+    <section class="cover-image" style="background-image: url('{{ $event->game->cover }}');">
 
-    <p>Show details about this event and who will go</p>
+       <a href="/events/{{ $event->id }}">
+           <h1>{{ $event->name }}</h1>
+       </a>
+
+    </section>
+
+    <section class="main-content">
+
+       <div class="event-details">
+           <div class="column event-description">
+                <span class="day">
+                    {{ $event->started_at->format('dS M') }}
+                </span>
+                <span class="time">
+                    {{ $event->started_at->format('h:ia') }} -
+                    {{ $event->ended_at->format('h:ia') }}
+                </span>
+
+                <p>{{ $event->description }}</p>
+
+                {!! Form::model(null, ['method' => 'post', 'action' => 'PagesController@participants', 'class' => 'decision']) !!}
+                {!! Form::hidden('event_id', $event->id, ['class' => 'form-control']) !!}
+                {!! Form::radio('participant', 1, null, ['id' => 'event_yes_' . $event->id, 'class' => 'hide yes_radio']) !!}
+                {!! Form::radio('participant', 0, null, ['id' => 'event_no_' . $event->id, 'class' => 'hide no_radio']) !!}
+                @if (in_array($user->id, $event->going_users()))
+                <a href="#" class="btn no"><span class="ion-close"></span><span>Leave event</span></a>
+                @elseif (in_array($user->id, $event->not_going_users()))
+                <a href="#" class="btn yes"><span class="ion-checkmark"></span><span>Join event</span></a>
+                @else
+                <a href="#" class="btn yes"><span class="ion-checkmark"></span><span>Join event</span></a>
+                <a href="#" class="btn no"><span class="ion-close"></span><span>Leave event</span></a>
+                @endif
+                {!! Form::close() !!}
+            </div>
+
+             <div class="column event-participants">
+                <h2>Event Owner</h2>
+
+                <a href="/users/{{ $event->user->id }}">
+                    <img src="{{ $event->user->avatar() }}" alt="{{ $event->user->name }}" class="avatar author">
+                </a>
+
+                <h2>Who is coming</h2>
+                @foreach($event->participants as $participant)
+                    @if ($participant->participant == 1 && $participant->user->id != $event->user->id)
+                        <a href="/users/{{ $participant->user->id }}">
+                            <img src="{{ $participant->user->avatar() }}" alt="{{ $participant->user->name }}" class="avatar">
+                        </a>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+
+    </section>
 
 @stop

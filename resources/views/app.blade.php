@@ -4,9 +4,9 @@
     <title>Langara eSports</title>
     <link href="/css/app.css" rel="stylesheet" type="text/css" />
 </head>
-<body class="flex-container">
+<body>
 
-<div class="wrapper-main profile-page">
+<div class="wrapper-main">
     <header>
         <div class="wrapper-nav max-width">
             <a href="{{ route('home') }}" class="logo"><img src="/images/logo.svg"></a>

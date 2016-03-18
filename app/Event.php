@@ -51,4 +51,30 @@ class Event extends Model
         return $this->hasMany('App\Participant');
     }
 
+    public function going_users()
+    {
+        $users = [];
+
+        foreach($this->participants as $participant) {
+            if ($participant->participant == 1) {
+                $users[] = $participant->user_id;
+            }
+        }
+
+        return $users;
+    }
+
+    public function not_going_users()
+    {
+        $users = [];
+
+        foreach($this->participants as $participant) {
+            if ($participant->participant == 0) {
+                $users[] = $participant->user_id;
+            }
+        }
+
+        return $users;
+    }
+
 }

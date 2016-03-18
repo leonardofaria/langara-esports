@@ -9,7 +9,7 @@
 
         {!! Form::open(['url' => 'games']) !!}
 
-            @include('games._form', ['submitButtonText' => 'Add Game'])
+        @include('games._form', ['submitButtonText' => 'Add Game'])
 
         {!! Form::close() !!}
 

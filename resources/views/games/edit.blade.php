@@ -9,7 +9,7 @@
 
         {!! Form::model($game, ['method' => 'PATCH', 'action' => ['GamesController@update', $game]]) !!}
 
-            @include('games._form', ['submitButtonText' => 'Update Game'])
+        @include('games._form', ['submitButtonText' => 'Update Game'])
 
         {!! Form::close() !!}
 

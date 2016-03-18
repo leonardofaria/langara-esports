@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="admin">
-        <a href="{{ URL::to('admins/create') }}" class="btn btn-primary pull-right"><span class="ion-ios-plus-empty"></span></a>
+        <a href="{{ URL::to('admins/create') }}" class="btn btn-primary pull-right new">
+            <span class="ion-ios-plus-empty"></span>
+            <span>New admin</span>
+        </a>
 
         <h2>All the admins</h2>
 
@@ -23,7 +26,7 @@
                     </td>
                     <td>
                         {!! Form::open(['action' => ['AdminsController@destroy', $admin->id], 'method' => 'delete']) !!}
-                            {!! Form::button('<span class="ion-trash-a"></span>', ['class'=> 'btn btn-danger', 'type' => 'submit']) !!}
+                            {!! Form::button('<span class="ion-trash-a"></span>', ['class'=> 'btn btn-danger', 'type' => 'submit', 'onclick' => 'return confirm("Are you sure?");']) !!}
                         {!! Form::close() !!}
                     </td>
                 </tr>

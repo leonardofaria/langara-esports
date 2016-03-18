@@ -9,7 +9,7 @@
 
         {!! Form::model($event, ['method' => 'PATCH', 'action' => ['EventsController@update', $event]]) !!}
 
-            @include('events._form', ['submitButtonText' => 'Update Game'])
+        @include('events._form', ['submitButtonText' => 'Update Game'])
 
         {!! Form::close() !!}
 

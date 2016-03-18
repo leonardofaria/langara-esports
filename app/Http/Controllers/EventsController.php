@@ -68,8 +68,9 @@ class EventsController extends Controller
     public function show($id)
     {
         $event = Event::findOrFail($id);
+        $user = $this->user;
 
-        return view('events.show', compact('event'));
+        return view('events.show', compact('event', 'user'));
     }
 
     /**

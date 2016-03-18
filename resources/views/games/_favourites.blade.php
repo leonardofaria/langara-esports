@@ -9,18 +9,16 @@
 
             <label for="game_{{ $game->id }}" class="game {{ $style }}" style="background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 1) ), url('{{ $game->cover }}');">
                 {{ Form::checkbox('games[]', $game->id, null, ['id' => 'game_' . $game->id, 'class' => 'hide']) }}
-                 <figure class="game-logo">
-                    <img src="{{ $game->avatar }}" alt="{{ $game->name }}">
-                 </figure>
-                 <h2>{{ $game->name }}</h2>
+                <img src="{{ $game->avatar }}" alt="{{ $game->name }}" class="avatar">
+                <span>{{ $game->name }}</span>
             </label>
         @endforeach
 
     </div>
 
-    <button type="submit" class="save-button">
+    <button type="submit" class="btn">
         <span class="ion-archive"></span>
-        Save
+        <span>Save</span>
     </button>
 
 {!! Form::close() !!}

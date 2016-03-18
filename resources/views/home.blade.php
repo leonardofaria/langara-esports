@@ -6,13 +6,11 @@
 </head>
 <body>
 
-<div class="container">
+    <div class="container">
 
-    @include('flash::message')
+        @yield('content')
 
-    @yield('content')
-
-</div>
+    </div>
 
 </body>
 </html>
