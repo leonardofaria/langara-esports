@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Event;
+use App\Participant;
 use App\Http\Requests;
 use App\Http\Requests\UserRequest;
 use Illuminate\HttpResponse;
@@ -68,14 +69,14 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $games = $user->games;
-        $events = Event::where(['user_id' => $id])->future()->get();
+        $participations = Participant::where(['user_id' => $user->id, 'participant' => 1])->get();
 
         $liked_games = [];
         foreach($user->games as $game) {
             $liked_games[] = $game->id;
         }
 
-        return view('users.show', compact('user', 'games', 'events', 'liked_games'));
+        return view('users.show', compact('user', 'games', 'participations', 'liked_games'));
     }
 
     /**
