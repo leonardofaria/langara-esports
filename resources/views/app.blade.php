@@ -3,13 +3,23 @@
 <head>
     <title>Langara eSports</title>
     <link href="/css/app.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1701756510065217";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="wrapper-main">
     <header>
         <div class="wrapper-nav max-width">
-            <a href="{{ route('home') }}" class="logo"><img src="/images/logo.svg"></a>
+            <a href="{{ route('home') }}"><img src="/images/logo.svg" class="logo"></a>
             <nav>
                 <ul>
                     @unless (Auth::check())

@@ -10,9 +10,9 @@
 
     </section>
 
-    <section class="main-content">
+    <section class="main-content max-width">
 
-       <div class="event-details">
+       <div class="event-details clearfix">
            <div class="column event-description">
                 <span class="day">
                     {{ $event->started_at->format('dS M') }}
@@ -28,13 +28,14 @@
                 {!! Form::hidden('event_id', $event->id, ['class' => 'form-control']) !!}
                 {!! Form::radio('participant', 1, null, ['id' => 'event_yes_' . $event->id, 'class' => 'hide yes_radio']) !!}
                 {!! Form::radio('participant', 0, null, ['id' => 'event_no_' . $event->id, 'class' => 'hide no_radio']) !!}
+                <p>Join event?</p>
                 @if (in_array($user->id, $event->going_users()))
                 <a href="#" class="btn no"><span class="ion-close"></span><span>Leave event</span></a>
                 @elseif (in_array($user->id, $event->not_going_users()))
                 <a href="#" class="btn yes"><span class="ion-checkmark"></span><span>Join event</span></a>
                 @else
-                <a href="#" class="btn yes"><span class="ion-checkmark"></span><span>Join event</span></a>
-                <a href="#" class="btn no"><span class="ion-close"></span><span>Leave event</span></a>
+                <a href="#" class="btn yes"><span class="ion-checkmark"></span></a>
+                <a href="#" class="btn no"><span class="ion-close"></span></a>
                 @endif
                 {!! Form::close() !!}
             </div>
@@ -55,7 +56,11 @@
                     @endif
                 @endforeach
             </div>
-        </div>
+       </div>
+
+       <div class="event-comments">
+            <div class="fb-comments" data-href="{{ Request::url() }}" data-numposts="10" data-colorscheme="dark" data-width="100%"></div>
+       </div>
 
     </section>
 
