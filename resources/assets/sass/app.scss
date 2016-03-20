@@ -1,7 +1,7 @@
 @import "normalize";
 @import url(http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100);
-@import "flatpickr.dark";
+@import "jquery.datetimepicker";
 
 /* ---------------------------------------------------------------- */
 /* VARIABLES */
@@ -52,12 +52,23 @@ a {
 .max-width {
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .wrapper-main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
 }
 
 .validation {
@@ -83,15 +94,16 @@ a {
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: #8BC34A;
+    background-color: #8BC34A !important;
   }
 
   &.no:hover {
-    background-color: $red;
+    background-color: $red !important;
   }
 
   > * {
     margin: 5px;
+    align-self: center;
   }
 
   span[class] {
@@ -105,35 +117,36 @@ a {
 
 
 header {
-  background: #000000;
+  background: #000;
+  padding: 25px 0;
 }
 
 .wrapper-nav {
-  text-align: center;
   display: flex;
   justify-content: space-between;
 
   .logo {
-    flex: 0 0 50px;
-    margin: 5px;
+    height: 70px;
+    max-width: auto;
   }
 
   nav {
-    flex: 1 1 auto;
+    align-self: center;
 
-    ul{
-      height: 80px;
-      line-height: 80px;
-      text-align: right;
+    ul {
+      display: flex;
 
       li {
         display: inline-block;
+        margin: 0 10px;
+        align-self: center;
 
         a {
-          padding: 0 10px;
           color: #fff;
+          display: block;
           text-transform: uppercase;
           font-size: 1rem;
+          padding: 0 10px;
           transition: all 0.5s;
 
           &:hover {
@@ -142,8 +155,10 @@ header {
         }
 
         &:last-of-type {
+          margin-right: 0;
+
           a {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
           }
         }
       }
@@ -194,17 +209,6 @@ header {
       height: 150px;
     }
   }
-}
-
-
-/* ---------------------------------------------------------------- */
-/* TYPOGRAPHY */
-/* ---------------------------------------------------------------- */
-
-
-.main-content{
-  margin: 0 2%;
-  margin-bottom: 30px;
 }
 
 
@@ -507,8 +511,9 @@ header {
 .content {
   @extend .max-width;
   background: rgba(255, 255, 255, 0.34);
+  margin-bottom: 40px;
 
-  .my-events, .all-events {
+  .my-events, .all-events, .add-event {
     display: flex;
     flex-wrap: wrap;
   }
@@ -544,7 +549,6 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 80px;
   text-align: center;
 
   .choose-game {
@@ -632,7 +636,22 @@ header {
   }
 
   form.decision {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    margin-top: 20px;
     display: flex;
+    align-items: center;
+
+    > * {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .btn {
+      background-color: transparent;
+      justify-content: center;
+      margin: 0;
+    }
   }
 
   .event-participants {
@@ -653,6 +672,13 @@ header {
       margin: 20px 0;
     }
   }
+}
+
+.event-comments {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  margin: 20px 10px;
+  padding: 10px;
 }
 
 /* ---------------------------------------------------------------- */
@@ -788,10 +814,11 @@ form.event-form {
 /* ---------------------------------------------------------------- */
 
 .admin {
+  @extend .max-width;
   background: rgba(255, 255, 255, 0.21);
   color: #fff;
+  margin: 20px auto;
   padding: 50px;
-  margin: 2%;
 
   h2 {
     color: #fff;
@@ -824,31 +851,52 @@ form.event-form {
     font-size: 1rem;
     width: 100%;
 
-    tr {
+    thead {
       th {
         font-size: 0.8rem;
         font-weight: normal;
         padding: 5px;
         text-transform: uppercase;
-      }
 
-      td {
-        text-align: center;
-
-        .btn {
-          display: inline-block;
-          margin: 0 5px;
-          padding: 10px;
-          width: 45px;
-
-          span {
-            font-size: 1rem;
-            margin: 0;
-          }
+        &.image {
+          width: 100px;
         }
 
-        a {
-          text-decoration: underline;
+        &.actions {
+          width: 115px;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          background: rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+        }
+
+        td {
+          text-align: center;
+
+          .btn {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 10px;
+            width: 45px;
+
+            span {
+              font-size: 1rem;
+              margin: 0;
+            }
+
+            .avatar {
+              margin: 5px;
+            }
+          }
+
+          a {
+            text-decoration: underline;
+          }
         }
       }
     }
@@ -918,6 +966,10 @@ form.event-form {
   &.alert-success {
     background: $green;
   }
+
+  &.alert-danger {
+    background: $red;
+  }
 }
 
 .pull-right {
@@ -925,5 +977,5 @@ form.event-form {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }

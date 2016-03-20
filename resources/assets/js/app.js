@@ -1,23 +1,13 @@
 $(document).ready(function(){
 
-    $.scrollTo = function (target, offset, speed, container) {
-        if (isNaN(target)) {
-            if (!(target instanceof jQuery))
-                target = $(target);
-            target = parseInt(target.offset().top);
+    $.fn.extend({
+        scrollTo : function(speed, easing) {
+            return this.each(function() {
+                var targetOffset = $(this).offset().top;
+                $('html,body').animate({ scrollTop: targetOffset }, speed, easing);
+            });
         }
-
-        container = container || "html, body";
-        if (!(container instanceof jQuery))
-            container = $(container);
-
-        speed = speed || 500;
-        offset = offset || 0;
-
-        container.animate({
-            scrollTop: target + offset
-        }, speed);
-    };
+    });
 
     // Event box
     var event = $('.event');
@@ -32,24 +22,29 @@ $(document).ready(function(){
         $(this).find('.decision').fadeOut(200);
     });
 
-    $('.event-buttons a').on('click', function(event) {
-        var className = $(this).attr('class');
+    if ($('.event-buttons a').length > 0) {
+        $('.event-buttons a').on('click', function(event, triggered) {
+            $('.event-buttons a').removeClass('active');
+            $(this).addClass('active');
 
-        $('.event-buttons a').removeClass('active');
-        $(this).addClass('active');
-        $('.content > div').hide();
-        $('.content .' + className).css('display', 'flex');
-    });
+            $('.content > div').addClass('hide');
+            $(this).attr('class').split(' ').map(function(cls){
+                $('.content .' + cls).removeClass('hide');
+            });
 
-    $('.content > div').hide();
-    if ($('.content .my-events').length > 0) {
-        $('.event-buttons a[class="my-events"]').click();
-    } else {
-        $('.event-buttons a')[0].click();
-        console.log('test');
-    }
-    if ($('.add-event .validation').length > 0) {
-        $('.event-buttons a')[3].click();
+            if (!triggered) {
+                $('.main-content').scrollTo('slow', 'swing');
+            }
+        });
+
+        if ($('.content .my-events').length > 0) {
+            $('.event-buttons a[class="my-events"]').trigger('click', true);
+        } else {
+            $('.event-buttons a[class="all-events"]').trigger('click', true);
+        }
+        if ($('.add-event .validation').length > 0) {
+            $('.event-buttons a[class="add-event"]').trigger('click');
+        }
     }
 
     yes.on('click', function(event){
@@ -87,7 +82,7 @@ $(document).ready(function(){
     });
 
 
-    // Add game UI
+    // Add game image preview UI
     preview = function(field, url) {
         var img = '<img src="' + url + '" />';
         $('#' + field).parent().find('.preview').html(img).slideDown();
@@ -100,6 +95,32 @@ $(document).ready(function(){
         } else {
             $(this).parent().find('.preview').hide();
         }
+    });
+
+
+    // Add event calendar UI
+    $('#started_at').datetimepicker({
+        theme: 'dark',
+        format: 'Y/m/d h:i a',
+        step: 30,
+        onShow: function(ct){
+            this.setOptions({
+                minDate: new Date()
+            });
+        },
+        timepicker: true
+    });
+
+    $('#ended_at').datetimepicker({
+        theme: 'dark',
+        format: 'Y/m/d h:i a',
+        step: 30,
+        onShow: function(ct){
+            this.setOptions({
+              minDate: $('#started_at').val() ? $('#started_at').val() : false
+            });
+        },
+        timepicker: true
     });
 
 });

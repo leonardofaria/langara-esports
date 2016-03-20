@@ -43,6 +43,8 @@
 
 </div>
 
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript" src="/js/app.js"></script>
 </body>
 </html>
