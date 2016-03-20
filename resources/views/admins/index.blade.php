@@ -4,10 +4,10 @@
     <div class="admin">
         <a href="{{ URL::to('admins/create') }}" class="btn btn-primary pull-right new">
             <span class="ion-ios-plus-empty"></span>
-            <span>New admin</span>
+            <span>New</span>
         </a>
 
-        <h2>All the admins</h2>
+        <h2>Admins</h2>
 
         <table class="table table-striped">
             <thead>

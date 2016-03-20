@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Langara eSports @yield('page-title')</title>
-    <link href="/css/app.css" rel="stylesheet" type="text/css" />
+    <link href="{{ elixir('css/app.css') }}" rel="stylesheet" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="@yield('meta-description')" />
     <meta property="og:image" content="@yield('meta-image')">
@@ -32,7 +32,7 @@
                         <li><a href="{{ route('social.login', ['facebook']) }}">Login via Facebook</a></li>
                     @else
                         @if (Auth::user()->admin()->first())
-                            <li><a href="{{ URL::to('admins/') }}" title="Manage administrator">Administrators</a></li>
+                            <li><a href="{{ URL::to('admins/') }}" title="Manage administrator">Admins</a></li>
                             <li><a href="{{ URL::to('games/') }}" title="Manage games">Games</a></li>
                             <li><a href="{{ URL::to('events/') }}" title="Manage events">Events</a></li>
                         @endif
@@ -51,6 +51,6 @@
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery.datetimepicker.full.min.js"></script>
-<script type="text/javascript" src="/js/app.js"></script>
+<script type="text/javascript" src="{{ elixir('js/app.js') }}"></script>
 </body>
 </html>

@@ -4,10 +4,10 @@
     <div class="admin">
         <a href="{{ URL::to('games/create') }}" class="btn btn-primary pull-right new">
             <span class="ion-ios-plus-empty"></span>
-            <span>New game</span>
+            <span>New</span>
         </a>
 
-        <h2>All the games</h2>
+        <h2>Games</h2>
 
         <table class="table table-striped">
             <thead>
