@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('page-title', '- ' . $game->name)
+@section('meta-image', $game->cover)
+@section('meta-description', $game->full_description())
+
 @section('content')
 
     <section class="cover-image" style="background-image: url('{{ $game->cover }}');">

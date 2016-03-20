@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('page-title', '- ' . $event->name . ' - ' . $event->started_at->format('m/d h:ia'))
+@section('meta-image', $event->game->cover)
+@section('meta-description', $event->full_description())
+
 @section('content')
 
     <section class="cover-image" style="background-image: url('{{ $event->game->cover }}');">

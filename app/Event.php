@@ -51,6 +51,11 @@ class Event extends Model
         return $this->hasMany('App\Participant');
     }
 
+    public function full_description()
+    {
+        return "Play " . $this->game->name . " with " . $this->user->name . " and other Langara eSports members";
+    }
+
     public function going_users()
     {
         $users = [];

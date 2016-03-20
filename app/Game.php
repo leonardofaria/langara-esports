@@ -16,4 +16,9 @@ class Game extends Model
     {
         return $this->hasMany('App\Event');
     }
+
+    public function full_description()
+    {
+        return "Play " . $this->name . " with Langara eSports members";
+    }
 }

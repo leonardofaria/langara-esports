@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Langara eSports</title>
+    <title>Langara eSports @yield('page-title')</title>
     <link href="/css/app.css" rel="stylesheet" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="@yield('meta-description')" />
+    <meta property="og:image" content="@yield('meta-image')">
+    <meta property="og:description" content="@yield('meta-description')">
+    <meta property="og:title" content="Langara eSports @yield('page-title')">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ Request::url() }}">
 </head>
 <body>
 
