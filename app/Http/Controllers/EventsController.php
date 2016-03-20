@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Event;
 use App\Game;
+use App\Participant;
 use App\Http\Requests;
 use App\Http\Requests\EventRequest;
 use Illuminate\HttpResponse;
@@ -53,10 +54,11 @@ class EventsController extends Controller
     {
         $event = new Event($request->all());
         Auth::user()->events()->save($event);
+        Participant::create(['user_id' => $event->user->id, 'event_id' => $event->id, 'participant' => 1]);
 
         Flash::success('The event has been created!');
 
-        return redirect('home');
+        return redirect('/events/' . $event->id);
     }
 
     /**
@@ -114,6 +116,11 @@ class EventsController extends Controller
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
+
+        if ($event->user->id !== $this->user->id && !$this->user->isAdmin()) {
+            Flash::error('You can not delete this event');
+            return redirect()->back();
+        }
 
         if ($event->delete()) {
             Flash::success('The event has been deleted!');
