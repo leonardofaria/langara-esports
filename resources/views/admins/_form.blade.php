@@ -5,5 +5,5 @@
 
 <button type="submit" class="btn">
     <span class="ion-archive"></span>
-    <span>Add Admin</span>
+    <span>{{ $submitButtonText }}</span>
 </button>

@@ -17,7 +17,9 @@
 
         <div class="event-buttons">
             <a class="all-events"><i class="ion-earth"></i>All Events</a>
+            @if ($user)
             <a class="add-event"><i class="ion-android-add-circle"></i>Add Event</a>
+            @endif
         </div>
 
         <div class="content">
@@ -31,12 +33,13 @@
                 @endif
             </div>
 
-
-            <div class="add-event">
-                {!! Form::open(['url' => 'events', 'novalidate' => 'novalidate', 'class' => 'event-form']) !!}
-                    @include('events._form', ['submitButtonText' => 'Add Event'])
-                {!! Form::close() !!}
-            </div>
+            @if ($user)
+                <div class="add-event">
+                    {!! Form::open(['url' => 'events', 'novalidate' => 'novalidate', 'class' => 'event-form']) !!}
+                        @include('events._form', ['submitButtonText' => 'Add Event'])
+                    {!! Form::close() !!}
+                </div>
+            @endif
         </div>
 
     </section>

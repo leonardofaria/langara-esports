@@ -19,7 +19,7 @@
     <div class="preview"></div>
 </div>
 
-<button class="save-button add" type="submit">
+<button class="btn" type="submit">
     <span class="ion-ios-download"></span>
-    {{ $submitButtonText }}
+    <span>{{ $submitButtonText }}</span>
 </button>

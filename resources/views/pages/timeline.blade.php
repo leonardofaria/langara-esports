@@ -14,7 +14,7 @@
         </div>
 
         <div class="content">
-            <div class="all-events">
+            <div class="hide all-events">
                 @if ($all_events)
                     @foreach($all_events as $event)
                         @include('events._event')
@@ -25,7 +25,7 @@
             </div>
 
 
-            <div class="my-events">
+            <div class="hide my-events">
                 @if ($my_events)
                     @foreach($my_events as $event)
                         @include('events._event')
@@ -36,12 +36,12 @@
             </div>
 
 
-            <div class="my-games">
+            <div class="hide my-games">
                 @include('games._favourites')
             </div>
 
 
-            <div class="add-event">
+            <div class="hide add-event">
                 {!! Form::open(['url' => 'events', 'novalidate' => 'novalidate', 'class' => 'event-form']) !!}
                     @include('events._form', ['submitButtonText' => 'Add Event'])
                 {!! Form::close() !!}

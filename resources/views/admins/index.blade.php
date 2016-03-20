@@ -12,17 +12,23 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th></th>
+                    <th class="image"></th>
                     <th>Name</th>
-                    <th>Actions</th>
+                    <th class="actions">Actions</th>
                 </tr>
             </thead>
             <tbody>
             @foreach($admins as $admin)
                 <tr>
-                    <td><img src="{{ $admin->user()->first()->avatar() }}" alt="{{ $admin->user()->first()->name }}" class="avatar" /></td>
                     <td>
-                        {{ $admin->user()->first()->name }}
+                        <a href="/users/{{ $admin->user->id }}">
+                            <img src="{{ $admin->user->avatar() }}" alt="{{ $admin->user->name }}" class="avatar" />
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/users/{{ $admin->user->id }}">
+                            {{ $admin->user()->first()->name }}
+                        </a>
                     </td>
                     <td>
                         {!! Form::open(['action' => ['AdminsController@destroy', $admin->id], 'method' => 'delete']) !!}

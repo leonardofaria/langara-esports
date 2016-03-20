@@ -24,20 +24,22 @@
 
                 <p>{{ $event->description }}</p>
 
-                {!! Form::model(null, ['method' => 'post', 'action' => 'PagesController@participants', 'class' => 'decision']) !!}
-                {!! Form::hidden('event_id', $event->id, ['class' => 'form-control']) !!}
-                {!! Form::radio('participant', 1, null, ['id' => 'event_yes_' . $event->id, 'class' => 'hide yes_radio']) !!}
-                {!! Form::radio('participant', 0, null, ['id' => 'event_no_' . $event->id, 'class' => 'hide no_radio']) !!}
-                <p>Join event?</p>
-                @if (in_array($user->id, $event->going_users()))
-                <a href="#" class="btn no"><span class="ion-close"></span><span>Leave event</span></a>
-                @elseif (in_array($user->id, $event->not_going_users()))
-                <a href="#" class="btn yes"><span class="ion-checkmark"></span><span>Join event</span></a>
-                @else
-                <a href="#" class="btn yes"><span class="ion-checkmark"></span></a>
-                <a href="#" class="btn no"><span class="ion-close"></span></a>
+                @if ($user)
+                    {!! Form::model(null, ['method' => 'post', 'action' => 'PagesController@participants', 'class' => 'decision']) !!}
+                    {!! Form::hidden('event_id', $event->id, ['class' => 'form-control']) !!}
+                    {!! Form::radio('participant', 1, null, ['id' => 'event_yes_' . $event->id, 'class' => 'hide yes_radio']) !!}
+                    {!! Form::radio('participant', 0, null, ['id' => 'event_no_' . $event->id, 'class' => 'hide no_radio']) !!}
+                    <p>Join event?</p>
+                    @if (in_array($user->id, $event->going_users()))
+                    <a href="#" class="btn no"><span class="ion-close"></span><span>Leave event</span></a>
+                    @elseif (in_array($user->id, $event->not_going_users()))
+                    <a href="#" class="btn yes"><span class="ion-checkmark"></span><span>Join event</span></a>
+                    @else
+                    <a href="#" class="btn yes"><span class="ion-checkmark"></span></a>
+                    <a href="#" class="btn no"><span class="ion-close"></span></a>
+                    @endif
+                    {!! Form::close() !!}
                 @endif
-                {!! Form::close() !!}
             </div>
 
              <div class="column event-participants">
