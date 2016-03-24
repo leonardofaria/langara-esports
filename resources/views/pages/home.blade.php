@@ -8,15 +8,15 @@
 
             <div class="header-background">
 
-                <figure class="logo">
-                    <img src="/images/logoColor.svg" alt="">
-                </figure>
+                <div class="logo">
+                    <img src="/images/logoColor.svg" alt="Langara">
+                </div>
 
                 <div class="tagline">
 
                     <h1>The community For Gamers By Gamers</h1>
                     <div class="sign-in">
-                        <a href="#" class="facebook-button">
+                        <a href="{{ route('social.login', ['facebook']) }}" class="facebook-button">
                             <i class="fa fa-facebook-official"></i>
                             <p>Sign in using Facebook</p>
                         </a>
@@ -34,11 +34,6 @@
 
         <section class="app-introduction ">
 
-<!--
-            <video autoplay="true" loop>
-                <source src="videos/Fish-Tank.mp4" type="video/mp4">
-            </video>
--->
             <div class="introduction-wrapper">
                 <h3>We connect you to other student gamers, so you never have to play alone</h3>
             </div>
